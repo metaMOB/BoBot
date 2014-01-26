@@ -1,0 +1,47 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/boBot/Scripts/BoBot_SmoothFollow2D.cs">
+    <Files>
+      <File FileName="Assets/boBot/Scripts/boBot_SidescrollControl.cs1" Line="235" Column="8" />
+      <File FileName="Assets/Plugins/LeanTween.cs" Line="1004" Column="5" />
+      <File FileName="Assets/Standard Assets/Scripts/General Scripts/ActivateTrigger.cs" Line="43" Column="1" />
+      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_MainCollider.cs" Line="88" Column="6" />
+      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_ActionColliderGeneric.cs" Line="51" Column="4" />
+      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_ClimbRopeCollider.cs" Line="35" Column="1" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_GripperAnimationComponent.cs" Line="17" Column="24" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_AnimationComponent.cs" Line="21" Column="34" />
+      <File FileName="Assets/boBot/Scripts/BoBot_SidescrollControl.cs" Line="852" Column="3" />
+      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_CarryCollider.cs" Line="19" Column="52" />
+      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_ClimbEdgeCollider.cs" Line="21" Column="32" />
+      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_ClimbLadderCollider.cs" Line="18" Column="1" />
+      <File FileName="Assets/boBot/Scripts/Tags/BoBot_LightningTag.cs" Line="18" Column="73" />
+      <File FileName="Assets/boBot/Scripts/Tags/BoBot_CameraTag.cs" Line="16" Column="3" />
+      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_Switch.cs" Line="17" Column="26" />
+      <File FileName="Assets/boBot/Scripts/BoBot_InputTouch.cs" Line="18" Column="4" />
+      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_ControlCollider.cs" Line="71" Column="54" />
+      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_DeathCollider.cs" Line="19" Column="49" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_BasicPhysicsComponent.cs" Line="1" Column="1" />
+      <File FileName="Assets/boBot/Scripts/BoBot_InputKeyboard.cs" Line="16" Column="31" />
+      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_BridgePole.cs" Line="8" Column="46" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_HitCounterComponent.cs" Line="27" Column="31" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_DestroyComponent.cs" Line="8" Column="2" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_EnvironmentComponent.cs" Line="25" Column="5" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_RiddleComponent.cs" Line="14" Column="25" />
+      <File FileName="Assets/boBot/Scripts/Tags/BoBot_SuccessTag.cs" Line="5" Column="24" />
+      <File FileName="Assets/boBot/Scripts/BoBot_Global.cs" Line="84" Column="56" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_ChangeTagComponent.cs" Line="4" Column="61" />
+      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_SensorPlate.cs" Line="18" Column="22" />
+      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_ControlComponent.cs" Line="14" Column="48" />
+      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_OnOffComponent.cs" Line="15" Column="26" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_GearComponent.cs" Line="1" Column="1" />
+      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_Saw.cs" Line="8" Column="25" />
+      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_GravityPlate.cs" Line="1" Column="1" />
+      <File FileName="Assets/boBot/Scripts/BoBot_SmoothFollow2D.cs" Line="114" Column="56" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_LevelBGComponent.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

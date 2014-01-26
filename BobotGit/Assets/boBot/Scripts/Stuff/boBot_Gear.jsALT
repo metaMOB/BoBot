@@ -1,0 +1,27 @@
+﻿#pragma strict
+
+var rpm : float = 1;
+var connectedGear : GameObject;
+
+private var rotationSpeedVector : Vector3;
+private var connectedRotation : Vector3;
+
+function Start() {
+	rotationSpeedVector = Vector3.forward * (Mathf.PI * 2) * -rpm;
+	connectedRotation = Vector3.zero;
+}
+ 
+function Update () {
+ 
+    var rotationSpeedVectorNew : Vector3 = rotationSpeedVector + (connectedRotation / this.transform.localScale.x);
+	transform.Rotate(rotationSpeedVectorNew * Time.deltaTime);
+	//transform.Rotate(connectedRotation / this.transform.localScale.x * Time.deltaTime);
+	
+	if (connectedGear){
+		connectedGear.GetComponent(boBot_Gear).setRotation (-rotationSpeedVectorNew * this.transform.localScale.x);
+	}
+}
+
+function setRotation (vec : Vector3){
+	connectedRotation = vec;
+}

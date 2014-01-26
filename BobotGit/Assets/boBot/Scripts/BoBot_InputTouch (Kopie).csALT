@@ -1,0 +1,125 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class BoBot_InputTouch : MonoBehaviour {
+	
+	Transform thumbPad;
+	Transform thumbPadFrame;
+	
+	GameObject objThumbPad;
+	GameObject objThumbPadFrame;
+	
+	Vector3 pos = Vector3.zero;
+	float tolleranceUp = 1.1f;
+	float tolleranceDown = 0.9f;
+	
+	float maxDistance = 0.0025f;
+	
+	bool isTouch = false;
+	float touchTime = 0f;
+	Vector3 movement;
+	
+	// Use this for initialization
+	void Start () {
+		objThumbPadFrame = GameObject.Find("ThumbStickFrame");
+		objThumbPad = GameObject.Find("ThumbStick");
+		thumbPadFrame = objThumbPadFrame.transform;
+		thumbPad = objThumbPad.transform;
+		
+		objThumbPad.SetActive ( false);
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		processInput();
+	}
+	
+	public void processInput() {	
+		float deltaTime = Time.deltaTime;
+		
+		
+		
+		
+		/*if (Input.GetKey (KeyCode.LeftArrow) )
+		{	
+			BoBotGlobal.input_horizontalDirection = Mathf.Max (-1f, Mathf.Min ( 0f, BoBotGlobal.input_horizontalDirection-deltaTime));
+		} else if (Input.GetKey (KeyCode.RightArrow) )
+		{	
+			BoBotGlobal.input_horizontalDirection = Mathf.Min ( 1f, Mathf.Max ( 0f, BoBotGlobal.input_horizontalDirection+deltaTime));
+		} else {
+			BoBotGlobal.input_horizontalDirection = 0f;
+		}
+		
+		if (Input.GetKey (KeyCode.UpArrow) )
+		{	
+			BoBotGlobal.input_verticalDirection = Mathf.Min ( 1f, Mathf.Max ( 0f, BoBotGlobal.input_verticalDirection+deltaTime));
+		} else if (Input.GetKey (KeyCode.DownArrow) )
+		{	
+			BoBotGlobal.input_verticalDirection = Mathf.Max (-1f, Mathf.Min ( 0f, BoBotGlobal.input_verticalDirection-deltaTime));
+		} else {
+			BoBotGlobal.input_verticalDirection = 0f;
+		}
+		
+		if (Input.GetKey (KeyCode.LeftShift) )
+		{	
+			BoBotGlobal.input_action = Mathf.Min ( 1f, Mathf.Max ( 0f, BoBotGlobal.input_action+deltaTime));
+		} else {
+			BoBotGlobal.input_action = 0f;
+		}*/
+		
+		if ( Input.GetMouseButton(0) ){
+			touchTime += deltaTime;
+			
+			pos.x = Input.mousePosition.x / Screen.width;
+				pos.y = Input.mousePosition.y / Screen.height;
+			if (!isTouch){				
+				thumbPadFrame.position = pos;
+				isTouch = true;
+			}
+			
+			objThumbPadFrame.SetActive (true);	
+			objThumbPad.SetActive (true);
+			
+			//pos.x = Mathf.Max ( thumbPadFrame.position.x * tolleranceDown, Mathf.Min( thumbPadFrame.position.x * tolleranceUp,  pos.x));
+			//pos.y = Mathf.Max ( thumbPadFrame.position.y * tolleranceDown, Mathf.Min( thumbPadFrame.position.y * tolleranceUp,  pos.y));
+		
+			
+			Vector3 diffPos = (pos - thumbPadFrame.position);			
+			Vector3 normPos = diffPos.normalized * 0.1f;
+			//if (  (thumbPadFrame.position - pos).sqrMagnitude <= maxDistance){
+			
+			if ( diffPos.sqrMagnitude <=  normPos.sqrMagnitude){
+				thumbPad.position = thumbPadFrame.position + diffPos;
+			} else {
+				thumbPad.position = thumbPadFrame.position + normPos;
+			}
+			
+			//Debug.Log ((thumbPad.position - thumbPadFrame.position  ) * 10f);
+			movement = (thumbPad.position - thumbPadFrame.position  ) * 10f;
+			if (movement.x >= 0.1 || movement.x <= -0.1){
+				BoBotGlobal.input_horizontalDirection = movement.x;
+			}
+			if (movement.y >= 0.3 || movement.y <= -0.3){
+				BoBotGlobal.input_verticalDirection = movement.y;
+			}
+			
+		} else{
+			if (touchTime > 0f && touchTime < 0.25f){
+				BoBotGlobal.input_horizontalDirectionShort = Mathf.Abs(movement.x) / movement.x;
+				//Debug.Log ( movement.x+" dir "+Mathf.Abs(movement.x) / movement.x);
+			}
+			
+			isTouch = false;
+			objThumbPadFrame.SetActive (false);
+			objThumbPad.SetActive (false);			
+			
+			BoBotGlobal.input_horizontalDirection = 0f;
+			BoBotGlobal.input_verticalDirection = 0f;
+			touchTime = 0f;
+		}
+		
+		//Debug.Log(Input.mousePosition.x / Screen.width + "/"+Input.mousePosition.y / Screen.height);
+		
+		//Debug.Log (BoBotGlobal.input_horizontalDirection);
+	}	
+}

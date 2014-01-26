@@ -1,0 +1,173 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
+public class BoBot_AnimationComponent : BoBot_OnOffComponent {	
+	
+	
+	public enum mode {manual, bounce, onOff};
+	
+	public mode animationType;
+	public Animation animationSet;
+	
+	public float rotationSpeed = 0f;
+	
+	private bool animationState;
+	protected Rigidbody rigidToAniamte;
+	
+	public BoBot_AnimationTag firstAnimationWaypoint;
+	public float speed = 1f;
+	public bool runAtStart = false;
+	public float actualElement = 0f;
+	public AudioClip animationSound;
+		
+	private int direction = 1;
+	private List<BoBot_AnimationTag> waypoints = new List<BoBot_AnimationTag>();
+	
+	private BoBot_AnimationTag currentWP;
+	private BoBot_AnimationTag nextWP;
+	
+	private Transform currentWPTransform;
+	private Transform nextWPTransform;
+	
+	private BoBot_AnimationComponent animationComponent;
+	//private float actualValue = 0f;
+	
+	private BoBot_DebugComponent debugInfo;
+	
+	public void Start(){
+		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
+		rigidToAniamte = this.GetComponent<Rigidbody>();
+		//rigidToAniamte.isKinematic = true;
+		
+	//	Debug.Log ("ini");
+		
+		if (firstAnimationWaypoint != null){
+			waypoints.Add(firstAnimationWaypoint);
+			while (waypoints[waypoints.Count-1].nextWaypoint != null && !waypoints.Contains(waypoints[waypoints.Count-1].nextWaypoint)){
+				waypoints.Add (waypoints[waypoints.Count-1].nextWaypoint);
+			}
+			
+			currentWP = firstAnimationWaypoint;
+			nextWP = currentWP.nextWaypoint;		
+			currentWPTransform = currentWP.transform;
+			nextWPTransform = nextWP.transform;
+		}
+		
+		
+		
+		//animationComponent = objectToAnimate.GetComponentInChildren<BoBot_AnimationComponent>();
+		if (rigidToAniamte && firstAnimationWaypoint){
+			rigidToAniamte.MovePosition ( firstAnimationWaypoint.transform.position );
+		}
+		
+		
+		isRunning = runAtStart;
+		//animationComponent.setAnimationState(isRunning);
+	}
+	
+	void Update () {
+		if (BoBotGlobal.debugging && debugInfo){
+			debugInfo.addText ("AnimationComponent");
+			debugInfo.addText ("> Active "+isRunning);
+			debugInfo.addText ("> current WP "+currentWP);
+			debugInfo.addText ("> next WP "+nextWP);
+			debugInfo.addText ("> rotation spd "+rotationSpeed);
+		}
+		
+		if (state  && rigidToAniamte.isKinematic){
+			actualElement += Time.deltaTime * speed;
+			
+			if ( rotationSpeed > 0f){
+				rigidToAniamte.transform.Rotate(new Vector3(0f, 0f, rotationSpeed * Time.deltaTime));	
+			}			
+			
+		//	if (!manualControl){
+				// * actualValue ;
+		//	}
+			
+			if (firstAnimationWaypoint != null && currentWP.nextWaypoint.nextWaypoint != null){		
+				if (actualElement >= 1f){
+					actualElement = 0;
+					currentWP = currentWP.nextWaypoint;
+					nextWP = currentWP.nextWaypoint;
+					
+					currentWPTransform = currentWP.transform;
+					nextWPTransform = nextWP.transform;
+				} else 	if (actualElement < 0f){
+					actualElement = 1;
+					foreach (BoBot_AnimationTag waypoint in waypoints){
+						if (waypoint.nextWaypoint == currentWP){
+							currentWP = waypoint;
+							nextWP = currentWP.nextWaypoint;
+							break;
+						}
+					}
+					
+					currentWPTransform = currentWP.transform;
+					nextWPTransform = nextWP.transform;
+					
+				}
+				
+				Vector3 newPos = Vector3.Lerp(currentWPTransform.position, nextWPTransform.position, actualElement);						
+				rigidToAniamte.MovePosition ( newPos );
+			}
+		}
+	}
+	
+	public virtual void setAnimationState (bool state){
+		if (rotationSpeed == 0f && animationSet != null){
+			if (!animationState && state){		
+				animationSet.Stop("inactive");
+				animationSet.PlayQueued("start", QueueMode.CompleteOthers);
+				animationSet.PlayQueued("active", QueueMode.CompleteOthers);
+			} else if (animationState && !state){
+				animationSet.Stop("active");
+				animationSet.PlayQueued("stop", QueueMode.CompleteOthers);
+				animationSet.PlayQueued("inactive", QueueMode.CompleteOthers); 
+			}			
+		}
+		animationState = state;
+	}	
+	
+	
+	public virtual void startAnimation(){
+		isRunning = true;
+		if (animationComponent != null){
+			animationComponent.setAnimationState(true);
+		}
+	}
+	
+	public virtual void pauseAnimation(){
+		isRunning = false;
+		if (animationComponent != null){
+			animationComponent.setAnimationState(false);
+		}
+	}
+	
+	public virtual void stopAnimation(){
+		isRunning = false;
+		actualElement = 0f;
+		if (animationComponent != null){
+			animationComponent.setAnimationState(false);
+		}
+	}
+	
+	public virtual void on(){
+		
+	}
+	
+	public virtual void off(){
+		
+	}
+	
+	/*public virtual void setV (float value){
+		//actualElement += value * Time.deltaTime;
+		actualValue = value;
+		isRunning = (value != 0);
+		Debug.Log ("anim "+actualValue);
+	}*/
+	
+}
