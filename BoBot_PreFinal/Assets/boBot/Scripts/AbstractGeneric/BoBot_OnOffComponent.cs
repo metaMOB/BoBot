@@ -61,7 +61,7 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 	override public void setValue (float newVal, int channel){
 		if (this.channel == channel){
 			
-			this.val = newVal;
+			this.val = Mathf.Round(newVal * 10f)/10f ;
 			
 			
 			

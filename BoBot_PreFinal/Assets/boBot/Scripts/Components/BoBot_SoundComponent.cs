@@ -4,13 +4,17 @@ using System.Collections;
 [RequireComponent (typeof (BoBot_BasicPhysicsComponent))]
 public class BoBot_SoundComponent : MonoBehaviour {
 	
-	public AudioClip horizontalSound;
+	public AudioClip horizontalMoveSound;
+	public AudioClip horizontalHitSound;
 	public AudioClip verticalHitSound;
 	
 	public float verticalHitGate = 0.3f;
+	public float horizontalMovingGate = 0.01f;
+	public float horizontalHitGate = 0.01f;
 	
-	private AudioSource audioSourceMove;
-	private AudioSource audioSourceHit;
+	private AudioSource audioSourceHorizontalMove;
+	private AudioSource audioSourceHorizontalHit;
+	private AudioSource audioSourceVerticalHit;
 	
 	private BoBot_BasicPhysicsComponent basicPhysics;
 	
@@ -28,12 +32,14 @@ public class BoBot_SoundComponent : MonoBehaviour {
 		//rigid = gameObject.rigidbody.transform;
 		//lastPos = rigid.position;
 		
-		audioSourceMove = gameObject.AddComponent<AudioSource>();
-		audioSourceHit = gameObject.AddComponent<AudioSource>();
+		audioSourceHorizontalMove = gameObject.AddComponent<AudioSource>();
+		audioSourceHorizontalHit = gameObject.AddComponent<AudioSource>();
+		audioSourceVerticalHit = gameObject.AddComponent<AudioSource>();
 		
-		audioSourceMove.clip = horizontalSound;
-		audioSourceHit.clip = verticalHitSound;
-		audioSourceHit.volume = 10;
+		audioSourceHorizontalMove.clip = horizontalMoveSound;
+		audioSourceHorizontalHit.clip = horizontalHitSound;
+		audioSourceVerticalHit.clip = verticalHitSound;
+		audioSourceVerticalHit.volume = 10;
 	//	Debug.Log ("ssadsd "+gameObject.name);
 		basicPhysics = gameObject.GetComponent<BoBot_BasicPhysicsComponent>();
 		//Debug.Log (basicPhysics);
@@ -45,10 +51,10 @@ public class BoBot_SoundComponent : MonoBehaviour {
 			debugInfo.addText ("SoundComponent");
 			//debugInfo.addText ("> Delta2 "+(deltaTwo.x).ToString("#0.##")+ "/"+(deltaTwo.y).ToString("#0.##"));
 			
-			debugInfo.addText ("> Ply Move "+audioSourceMove.isPlaying);
-			debugInfo.addText ("> Vol Move "+(audioSourceMove.volume).ToString("0.00"));
-			debugInfo.addText ("> Ply Move "+audioSourceHit.isPlaying);
-			debugInfo.addText ("> Vol Move "+(audioSourceHit.volume).ToString("0.00"));
+			debugInfo.addText ("> Ply Move "+audioSourceHorizontalMove.isPlaying);
+			debugInfo.addText ("> Vol Move "+(audioSourceHorizontalMove.volume).ToString("0.00"));
+			debugInfo.addText ("> Ply Move "+audioSourceVerticalHit.isPlaying);
+			debugInfo.addText ("> Vol Move "+(audioSourceVerticalHit.volume).ToString("0.00"));
 		}
 	}
 	
@@ -56,29 +62,34 @@ public class BoBot_SoundComponent : MonoBehaviour {
 		//Vector3 delta = rigid.position - lastPos;
 		//deltaTwo = delta - lastDelta;
 		try {
-			audioSourceMove.volume = Mathf.Abs(basicPhysics.delta.x*50);
+			//audioSourceHorizontalMove.volume = Mathf.Abs(basicPhysics.delta.x*50);
 		}
 		
 		catch {
 			Debug.Log ("error "+gameObject.name);	
 		}
 			
-		if (basicPhysics.deltaTwo.y > verticalHitGate && !audioSourceHit.isPlaying){
-			
-			audioSourceHit.loop = false;
-			audioSourceHit.Play();
+		if (basicPhysics.deltaTwo.y > verticalHitGate && !audioSourceVerticalHit.isPlaying){			
+			audioSourceVerticalHit.loop = false;
+			audioSourceVerticalHit.Play();
 		} 
+		
+		if ( Mathf.Abs(basicPhysics.deltaTwo.x) > horizontalHitGate && !audioSourceHorizontalHit.isPlaying){			
+			audioSourceHorizontalHit.loop = false;
+			audioSourceHorizontalHit.Play();
+		}
 		//Debug.Log ("vh "+ gameObject.name +"  "+basicPhysics.deltaTwo.y);
 		
-		if (basicPhysics.delta.x < -0.01f || basicPhysics.delta.x > 0.01f){
-			if (!audioSourceMove.isPlaying && gameObject.rigidbody.useGravity){
+		if (basicPhysics.delta.x < -horizontalMovingGate || basicPhysics.delta.x > horizontalMovingGate){
+			if (!audioSourceHorizontalMove.isPlaying ){ //&& gameObject.rigidbody.useGravity){
 			//Debug.Log ("play");
-				audioSourceMove.loop = false;				
-				audioSourceMove.Play();
+				audioSourceHorizontalMove.loop = true;				
+				audioSourceHorizontalMove.Play();
 			} 
-		} else if (audioSourceMove.isPlaying){
+		} else if (audioSourceHorizontalMove.isPlaying){
 			//Debug.Log ("stop");
-			audioSourceMove.Stop();
+			//audioSourceHorizontalMove.Stop();
+			audioSourceHorizontalMove.loop = false;			
 		}
 		//lastPos = rigid.position;
 		//lastDelta = delta;		

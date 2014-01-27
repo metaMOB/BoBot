@@ -12,10 +12,7 @@ public class BoBot_Switch : MonoBehaviour {
 	public float timeTillOff = 5f;
 	public float timeAtPosition = 1;
 	public GameObject [] control = null;	
-	
-	public AudioClip interactSound;
-	public AudioClip releaseSound;
-	
+		
 	private List<BoBot_ControlComponent> controlComponents = new List<BoBot_ControlComponent>();
 	
 	private float angle = 90;
