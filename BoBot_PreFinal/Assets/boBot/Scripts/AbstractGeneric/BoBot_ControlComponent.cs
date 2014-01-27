@@ -8,8 +8,7 @@ public class BoBot_ControlComponent : MonoBehaviour {
 			
 	protected bool isRunning;
 	public float val;	
-	public float valDelta = 0;
-	public float valDeltaTwo = 0;
+	public float valDelta;
 	public bool state = false;
 	public int channel = 1;
 	

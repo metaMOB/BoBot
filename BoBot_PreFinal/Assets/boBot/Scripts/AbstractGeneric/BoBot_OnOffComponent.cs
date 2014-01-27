@@ -43,7 +43,7 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 	}
 	
 	public void setAudio(AudioClip next, bool loop){
-		nextClip = nextClip;
+		nextClip = next;
 		loopNextClip = loop;
 	}
 	
@@ -55,12 +55,10 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 	
 	override public void setValue (float newVal, int channel){
 		if (this.channel == channel){
-			float delta = newVal - this.val;
-			this.valDeltaTwo = delta - this.valDeltaTwo;
-			this.valDelta = delta;
+			this.valDelta = newVal - val;
 			this.val = newVal;	
 			
-			Debug.Log ("--- "+val+" ### "+valDelta + " --- "+valDeltaTwo);
+			Debug.Log ("--- "+val+" ### "+valDelta + " --- ");
 			if (!manualControl){
 				if (this.val > gateUpper){		
 					this.state = !startRunning;

@@ -1,6 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/boBot/Scripts/AbstractGeneric/BoBot_OnOffComponent.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/boBot/Scripts/Components/BoBot_AnimationComponent.cs">
     <Files>
       <File FileName="../../../Documents/BoBotActive/boBot_CharacterTest_21_10/Assets/boBot/Scripts/boBot_SidescrollControl.cs1" Line="235" Column="8" />
       <File FileName="Assets/boBot/Scripts/boBot_SidescrollControl.cs1" Line="235" Column="8" />
@@ -10,14 +10,14 @@
       <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_ActionColliderGeneric.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Colliders/BoBot_ClimbRopeCollider.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_GripperAnimationComponent.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/Components/BoBot_AnimationComponent.cs" Line="124" Column="46" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_AnimationComponent.cs" Line="129" Column="34" />
       <File FileName="Assets/boBot/Scripts/BoBot_SidescrollControl.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Colliders/BoBot_CarryCollider.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Colliders/BoBot_ClimbEdgeCollider.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Colliders/BoBot_ClimbLadderCollider.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Tags/BoBot_LightningTag.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Tags/BoBot_CameraTag.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_Switch.cs" Line="8" Column="2" />
+      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_Switch.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/BoBot_InputTouch.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Colliders/BoBot_ControlCollider.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Colliders/BoBot_DeathCollider.cs" Line="1" Column="1" />
@@ -26,18 +26,18 @@
       <File FileName="Assets/boBot/Scripts/Stuff/BoBot_BridgePole.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_HitCounterComponent.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_DestroyComponent.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/Components/BoBot_EnvironmentComponent.cs" Line="22" Column="5" />
+      <File FileName="Assets/boBot/Scripts/Components/BoBot_EnvironmentComponent.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_RiddleComponent.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/Tags/BoBot_SuccessTag.cs" Line="15" Column="8" />
+      <File FileName="Assets/boBot/Scripts/Tags/BoBot_SuccessTag.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/BoBot_Global.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_ChangeTagComponent.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Stuff/BoBot_SensorPlate.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_ControlComponent.cs" Line="12" Column="23" />
-      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_OnOffComponent.cs" Line="63" Column="64" />
+      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_ControlComponent.cs" Line="11" Column="24" />
+      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_OnOffComponent.cs" Line="46" Column="18" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_GearComponent.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_Saw.cs" Line="45" Column="6" />
+      <File FileName="Assets/boBot/Scripts/Stuff/BoBot_Saw.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Stuff/BoBot_GravityPlate.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/BoBot_SmoothFollow2D.cs" Line="114" Column="56" />
+      <File FileName="Assets/boBot/Scripts/BoBot_SmoothFollow2D.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_LevelBGComponent.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Stuff/BoBot_LightningControl.cs" Line="1" Column="1" />
     </Files>

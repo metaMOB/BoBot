@@ -121,13 +121,13 @@ public class BoBot_AnimationComponent : BoBot_OnOffComponent {
 					
 				} else {
 					direction = val;
-					Debug.Log ("delta "+valDelta+" val "+val);
-					/*
-					if ( -gateLower < val && val < gateLower){
+					Debug.Log ("delta "+this.valDelta+" val "+val);
+					
+					if ( Mathf.Abs(val) < gateLower){
 						setAudio (soundHalt, false);
 					} else {
-						setAudio (soundMoving, false);
-					}*/
+						setAudio (soundMoving, true);
+					}
 				}
 					
 				if (actualElement < 0 || actualElement > waypoints.Count -1){
