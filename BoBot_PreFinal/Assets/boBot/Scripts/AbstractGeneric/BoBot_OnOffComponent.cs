@@ -25,7 +25,7 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 	
 	// Update is called once per frame
 	void LateUpdate () {	
-		
+		/*
 		this.valDeltaTwo = (this.val - this.valOld) - this.valDelta;
 		this.valDelta = val - valOld;
 		this.valOld = val;
@@ -44,7 +44,7 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 		try {
 			Debug.Log ("Sound "+currentClip.name+"   "+nextClip.name);
 		}
-		catch{}	
+		catch{}	*/
 	}
 	
 	public void setAudio(AudioClip next, bool loop){
