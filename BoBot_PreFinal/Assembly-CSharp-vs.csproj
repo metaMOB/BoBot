@@ -102,6 +102,7 @@
      <Compile Include="Assets\boBot\Scripts\Stuff\BoBot_LightningSky.cs" />
      <Compile Include="Assets\boBot\Scripts\Stuff\BoBot_MoveableObject.cs" />
      <Compile Include="Assets\boBot\Scripts\Stuff\BoBot_MoveableObject_HitDetector.cs" />
+     <Compile Include="Assets\boBot\Scripts\Stuff\BoBot_Rain.cs" />
      <Compile Include="Assets\boBot\Scripts\Stuff\BoBot_Saw.cs" />
      <Compile Include="Assets\boBot\Scripts\Stuff\BoBot_SensorPlate.cs" />
      <Compile Include="Assets\boBot\Scripts\Stuff\BoBot_Switch.cs" />
