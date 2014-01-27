@@ -42,7 +42,7 @@ public class BoBot_Saw : MonoBehaviour {
 	
 	void OnTriggerStay(Collider other){
 		if (!other.name.Equals("_collider")){
-			Debug.Log ("lkjlkjlkjlk "+other.gameObject.name + "  "+gameObject.GetComponent<BoBot_BasicPhysicsComponent>().delta);	
+			//Debug.Log ("lkjlkjlkjlk "+other.gameObject.name + "  "+gameObject.GetComponent<BoBot_BasicPhysicsComponent>().delta);	
 			partPos = (other.ClosestPointOnBounds (this.transform.position));// - this.transform.position);
 			
 			//foreach (ParticleSystem particle in particles){

@@ -19,7 +19,7 @@ public class BoBot_EnvironmentComponent : MonoBehaviour {
 	}
 	
 	public void setActiveRiddle(int nr){
-		Debug.Log ("new "+nr);
+		//Debug.Log ("new "+nr);
 		foreach (GameObject riddleObj in riddleObjs){
 			BoBot_RiddleComponent riddle = riddleObj.GetComponent<BoBot_RiddleComponent>();
 		//	Debug.Log ("!!!new "+nr+"  "+riddle.riddleNr);

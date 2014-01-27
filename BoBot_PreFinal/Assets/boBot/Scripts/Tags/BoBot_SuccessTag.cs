@@ -13,7 +13,6 @@ public class BoBot_SuccessTag : MonoBehaviour {
 	void OnTriggerEnter (){
 		//SAVE!!
 		try {
-			Debug.Log ("humbug");
 			BoBotGlobal.environment.setActiveRiddle (nextRiddle);
 		}
 		catch {
