@@ -16,7 +16,6 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 	private AudioSource audioSource;
 	private float valOld = 0;
 	
-	
 	// Use this for initialization
 	void Awake () {
 		this.state = startRunning;		
@@ -25,7 +24,13 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () {				
+	void LateUpdate () {	
+		
+		this.valDeltaTwo = (this.val - this.valOld) - this.valDelta;
+		this.valDelta = val - valOld;
+		this.valOld = val;
+		//Debug.Log ("--- "+this.val+" ### "+this.valDelta + " --- "+this.valDeltaTwo);
+		
 		if (currentClip != nextClip){
 			if (audioSource.isPlaying){
 				audioSource.loop = false;
@@ -55,10 +60,11 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 	
 	override public void setValue (float newVal, int channel){
 		if (this.channel == channel){
-			this.valDelta = newVal - val;
-			this.val = newVal;	
 			
-			Debug.Log ("--- "+val+" ### "+valDelta + " --- ");
+			this.val = newVal;
+			
+			
+			
 			if (!manualControl){
 				if (this.val > gateUpper){		
 					this.state = !startRunning;

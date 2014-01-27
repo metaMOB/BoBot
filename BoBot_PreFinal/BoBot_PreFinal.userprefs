@@ -1,6 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/boBot/Scripts/Components/BoBot_AnimationComponent.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/boBot/Scripts/AbstractGeneric/BoBot_OnOffComponent.cs">
     <Files>
       <File FileName="../../../Documents/BoBotActive/boBot_CharacterTest_21_10/Assets/boBot/Scripts/boBot_SidescrollControl.cs1" Line="235" Column="8" />
       <File FileName="Assets/boBot/Scripts/boBot_SidescrollControl.cs1" Line="235" Column="8" />
@@ -32,8 +32,8 @@
       <File FileName="Assets/boBot/Scripts/BoBot_Global.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_ChangeTagComponent.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Stuff/BoBot_SensorPlate.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_ControlComponent.cs" Line="11" Column="24" />
-      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_OnOffComponent.cs" Line="46" Column="18" />
+      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_ControlComponent.cs" Line="1" Column="1" />
+      <File FileName="Assets/boBot/Scripts/AbstractGeneric/BoBot_OnOffComponent.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Components/BoBot_GearComponent.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Stuff/BoBot_Saw.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Stuff/BoBot_GravityPlate.cs" Line="1" Column="1" />
