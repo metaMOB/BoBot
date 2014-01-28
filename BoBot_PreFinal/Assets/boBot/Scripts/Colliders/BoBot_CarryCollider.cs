@@ -16,7 +16,7 @@ public class BoBot_CarryCollider : BoBot_ActionColliderGeneric {
 			
 	void Awake () {		
 		this.reactOnTag = "canCarry";
-		this.distance = new Rect(0.35f, -0.45f, 0.2f, 0.5f);
+		this.distance = new Rect(0.15f, -0.45f, 0.6f, 0.5f);
 		this.sensorValue = "carry";
 		this.sensorValueGroup = "carry";
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
