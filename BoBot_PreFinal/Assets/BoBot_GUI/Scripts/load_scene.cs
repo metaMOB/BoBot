@@ -13,7 +13,7 @@ public class load_scene : MonoBehaviour {
 	public GUISkin menu;
 	string Level = "DemoLevel_01";
 	
-	string myName = "";
+	string myName = "PlayerOne";
 	string meinTimestamp = "";
 	string meinLevel ="";
 	
@@ -25,9 +25,9 @@ public class load_scene : MonoBehaviour {
 		sceneFader = GameObject.FindGameObjectWithTag ("GameController").GetComponent<SceneFader> ();
 		butRect = new Rect ((Screen.width - ctrlWidth)/2, 100, ctrlWidth, ctrlHeight);
 		
-		myName = GuiMenu.myName;
 		
 		file_to_load = static_holder.file_to_load;
+		Debug.Log(Application.persistentDataPath);
 		if(file_to_load !=""){
 			
 		Read_Data(file_to_load);
@@ -36,7 +36,7 @@ public class load_scene : MonoBehaviour {
 		else{
 			meinTimestamp = System.DateTime.Now.ToString();
 			meinLevel = Level;
-			file_to_load = "/boBot/Gamesave/Game/" + myName + System.DateTime.Now.Day.ToString() + System.DateTime.Now.Month.ToString() + System.DateTime.Now.Year.ToString() + System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() + System.DateTime.Now.Second.ToString() + ".sav";
+			file_to_load = "\\boBot\\Gamesave\\Game\\" + myName + System.DateTime.Now.Day.ToString() + System.DateTime.Now.Month.ToString() + System.DateTime.Now.Year.ToString() + System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() + System.DateTime.Now.Second.ToString() + ".sav";
 			Save_Load.Gamesave_Player_schreiben(myName,meinLevel,meinTimestamp,file_to_load,GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
 			
 			Read_Data(file_to_load);
@@ -112,7 +112,7 @@ public class load_scene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (BoBotGlobal.input_menu == 1f) {
+		if (Input.GetKeyDown (KeyCode.Escape)) {
 			ToggleTimeScale();
 		}
 	}

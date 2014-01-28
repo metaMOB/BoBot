@@ -5,25 +5,17 @@ using System.IO;
 public class Save_Load : MonoBehaviour {
 
 	
-	static string savings_Datei = Application.persistentDataPath + "/boBot/Gamesave/Player/savings.hvt";
+	static string savings_Datei = Application.persistentDataPath + "\\boBot\\Gamesave\\Player\\savings.hvt";
 	public static ArrayList ar_Player = new ArrayList();
 	public static ArrayList ar_newPlayer = new ArrayList();
 	public static ArrayList ar = new ArrayList();
 	
 	public static void Save_Directory(){
-		/*
-		if (PlayerPrefs.HasKey("juhu")){
-			Debug.Log (PlayerPrefs.GetString("juhu", 1));	
-			
-		} else {
-			PlayerPrefs.SetString("juhu", "na na na");	
-			Debug.Log ("is leer");
-		}*/
 		
-		if(!Directory.Exists(Application.persistentDataPath + "/boBot/Gamesave")){
-			Directory.CreateDirectory(Application.persistentDataPath + "/boBot/Gamesave");
-			Directory.CreateDirectory(Application.persistentDataPath + "/boBot/Gamesave/Player");
-			Directory.CreateDirectory(Application.persistentDataPath + "/boBot/Gamesave/Game");
+		if(!Directory.Exists(Application.persistentDataPath + "\\boBot\\Gamesave")){
+			Directory.CreateDirectory(Application.persistentDataPath + "\\boBot\\Gamesave");
+			Directory.CreateDirectory(Application.persistentDataPath + "\\boBot\\Gamesave\\Player");
+			Directory.CreateDirectory(Application.persistentDataPath + "\\boBot\\Gamesave\\Game");
 		}
 		else{
 			if(File.Exists(savings_Datei)){
@@ -131,6 +123,9 @@ public class Save_Load : MonoBehaviour {
 		ar_newPlayer.Clear();
 		
 		File.Delete(Application.persistentDataPath + del_Player);
+		
+		static_holder.file_to_load = "";
+		
 		Gamesave_player_lesen();
 		
 		

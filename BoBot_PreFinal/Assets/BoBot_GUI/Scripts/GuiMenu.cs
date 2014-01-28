@@ -1,151 +1,96 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using System.Collections.Generic;
 
 public class GuiMenu : MonoBehaviour {
-
-	private SceneFader sceneFader;
-	public int max_speicher = 4;
-	string Level = "DemoLevel_01";
 	
+	public Texture2D background;
+	public Texture2D first;
+	public Texture2D second;
+	public Texture2D third;
+	
+//	public GameObject rain;
+//	GameObject shower;
+	
+	private SceneFader sceneFader;
+	string Level = "DemoLevel_01";
+	public GUISkin skin;
+	static float HEIGHT = 1440.0f;
+	static float WIDTH = 2560.0f;
 	public static int guiSwitcher =0;
 	
-	public int hoehe_Speicherstand = 90;
-	public int breite_Spielladen = 400;
-	
-	public static string myName = "";
 	
 	
 	// Use this for initialization
 	void Awake () {
-		sceneFader = GameObject.FindGameObjectWithTag ("GameController").GetComponent<SceneFader> ();
 		
+		
+		sceneFader = GameObject.FindGameObjectWithTag ("GameController").GetComponent<SceneFader> ();
+//		shower = GameObject.Find("Regen");
+//		if(!shower){
+//			shower= (GameObject)Instantiate(rain,transform.position,transform.rotation);
+//			shower.name = "Regen";
+//		}
 		Save_Load.Save_Directory();
-	}
+	}//Awake
 
 	void OnGUI(){
 		
-		//Wenn gespeicherte Dateien vorhanden sind
-		if(Save_Load.ar_Player.Count > 0) {
-			switch(guiSwitcher){
-			case 0:
-				GUI.BeginGroup(new Rect((Screen.width/2)-150,200,300,400),"");
-				
-				//Wenn nicht mehr als Speicherstände angegeben
-				if((Save_Load.ar_Player.Count/4) < max_speicher){
-					
-					if (GUI.Button ((new Rect(30,25,240,50)),"Spiel starten")) {
-						guiSwitcher =2;
-					}
-					if (GUI.Button (new Rect(30,100,240,50),"Spiel laden")) {
-						guiSwitcher =1;
-					}	
-				}
-				//Wenn maximale Anzahl an Speicherständen erreicht
-				else{
-					if (GUI.Button ((new Rect(30,100,240,50)),"Spiel laden")) {
-						guiSwitcher =1;
-					}
-				}
-				if (GUI.Button (new Rect(30,175,240,50),"Exit")) {
-					Application.Quit();
-				}
-				GUI.EndGroup();	
-				break;
-			case 1:
-				GUI.BeginGroup(new Rect((Screen.width/2)-(breite_Spielladen/2),200,breite_Spielladen,120+((Save_Load.ar_Player.Count/4)*hoehe_Speicherstand)));
-					GUI.Box(new Rect(0,0,breite_Spielladen,200+((Save_Load.ar_Player.Count/4)*hoehe_Speicherstand)),"Spiel laden");
-				
-				for(int i = 0;i< Save_Load.ar_Player.Count;i=i+4){
-					GUI.BeginGroup(new Rect(0,30+(i*25),breite_Spielladen,90),"");
-					GUI.Box(new Rect(0,0,breite_Spielladen,90),"");
-					GUI.Label(new Rect(20,5,50,25),"Name: ");
-					GUI.Label(new Rect(100,5,120,25),Save_Load.ar_Player[i].ToString());
-					GUI.Label(new Rect(20,35,170,25),"Erstellt am: ");
-					GUI.Label(new Rect(100,35,170,25),Save_Load.ar_Player[i+2].ToString());
-					GUI.Label(new Rect(20,65,70,25),"Scene: ");
-					GUI.Label(new Rect(100,65,100,25),Save_Load.ar_Player[i+1].ToString());
-					if(GUI.Button(new Rect(320,5,70,35),"Play")){
-						
-						static_holder.file_to_load = Save_Load.ar_Player[i+3].ToString();
-						sceneFader.SwitchScene (Save_Load.ar_Player[i+1].ToString());
-					}
-					if(GUI.Button(new Rect(320,45,70,35),"Delete")){
-						Save_Load.Gamesave_Player_loeschen(Save_Load.ar_Player[i+3].ToString());
-					}
-					GUI.EndGroup();	
-				}
-				if(GUI.Button(new Rect(20,70+((Save_Load.ar_Player.Count/4)*hoehe_Speicherstand),70,35),"Zurück")){
-						guiSwitcher =0;
-				}
-				GUI.EndGroup();
-				break;
-			case 2:
-				GUI.BeginGroup(new Rect((Screen.width/2)-165,200,330,180),"");
-				GUI.Box(new Rect(0,0,340,180),"Spielstart");
-				GUI.Label(new Rect(10,30,200,25),"Gebe deinen Namen an: ");
-				myName = GUI.TextField(new Rect(10,60,200,25),myName);
-				
-				if(GUI.Button(new Rect(230,100,100,50),"Okay")){
-					sceneFader.SwitchScene (Level);
-				}
-				if(GUI.Button(new Rect(120,100,100,50),"Abbrechen")){
-					myName ="";
-				}
-				if(GUI.Button(new Rect(10,100,100,50),"Zurück")){
-						guiSwitcher =0;
-				}
-				GUI.EndGroup();
-				break;
-			}
-		}
+		GUI.skin = skin;
+		Vector2 scale = new Vector2((float)Screen.width / WIDTH,(float)Screen.height / HEIGHT);
+	
+		float scaledResolutionWidth = 2560.0f;//Screen.width / Screen.height * WIDTH;
+		float scaledResolutionHeight =  1440.0f;//Screen.height / Screen.height * HEIGHT;
 		
-		//Wenn noch keine gespeicherten Daten vorhanden sind
-		else{
-			switch(guiSwitcher){
-				
+		GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(scale.x,scale.y,1.0f));
+		
+		GUI.DrawTexture(new Rect(0,0,scaledResolutionWidth,scaledResolutionHeight), background);
+		GUI.DrawTexture(new Rect(0,0,scaledResolutionWidth,scaledResolutionHeight), third);
+		GUI.DrawTexture(new Rect(0,0,scaledResolutionWidth,scaledResolutionHeight), second);		
+		GUI.DrawTexture(new Rect(0,0,scaledResolutionWidth,scaledResolutionHeight), first);
+		
+//		Transform[] list = GameObject.Find("Regen").GetComponentsInChildren<Transform>();
+//		
+//		for(int i = 0; i< list.Length;i++){
+//			Debug.Log (list[i].name + " " + list[i].transform.localPosition);
+//			list[i].transform.localPosition = new Vector3(0.0f,0.0f,0.0f);
+//		}
+		 
+		
+		switch(guiSwitcher){
 			case 0:
-				GUI.BeginGroup(new Rect((Screen.width/2)-150,200,300,400),"");
-				if (GUI.Button ((new Rect(30,25,240,50)),"Spiel starten")) {
-					guiSwitcher =1;
-				}
-				if (GUI.Button (new Rect(30,100,240,50),"Exit")) {
-					Application.Quit();
-				}
-				GUI.EndGroup();	
-				break;
-			case 1:
-				GUI.BeginGroup(new Rect((Screen.width/2)-165,200,330,180),"");
-				GUI.Box(new Rect(0,0,340,180),"Spielstart");
-				GUI.Label(new Rect(10,30,200,25),"Gebe deinen Namen an: ");
-				myName = GUI.TextField(new Rect(10,60,200,25),myName);
+				GUILayout.BeginArea(new Rect((scaledResolutionWidth/2)-550,(scaledResolutionHeight/2)-75,512,512));
 				
-				if(GUI.Button(new Rect(230,100,100,50),"Okay")){
-					sceneFader.SwitchScene (Level);
-				}
-				if(GUI.Button(new Rect(120,100,100,50),"Abbrechen")){
-					myName ="";
-				}
-				if(GUI.Button(new Rect(10,100,100,50),"Zurück")){
-						guiSwitcher =0;
-				}
-				GUI.EndGroup();
+				GUILayout.Label("Menü");	
+			
+					if(GUILayout.Button("Spiel neu starten")){
+						if(Save_Load.ar_Player.Count>0){
+							Save_Load.Gamesave_Player_loeschen(Save_Load.ar_Player[3].ToString());
+						}//if
+						sceneFader.SwitchScene (Level);
+					}//if
+					
+					if(Save_Load.ar_Player.Count>0){
+						if(GUILayout.Button("Weiterspielen")){
+							static_holder.file_to_load = Save_Load.ar_Player[3].ToString();
+							sceneFader.SwitchScene (Save_Load.ar_Player[1].ToString());
+						}//if
+					}//if
+			
+					if(GUILayout.Button("Steuerung")){
+						guiSwitcher =1;
+					}//if
+			
+					if (GUILayout.Button("Spiel beenden")) {
+						Application.Quit();
+					}//if
+			
+			GUILayout.EndArea();	
 				break;
-			}
-		}
-		/*
-		if (GUILayout.Button ("Spiel starten")) {
-						sceneFader.SwitchScene ("Level_01");
-				}
-		if (GUILayout.Button ("Level auswählen")) {
-						sceneFader.SwitchScene("loadLevel");
-				}
+		case 1:
+			break;
 
-		if (GUILayout.Button ("Exit")) {
-			Application.Quit();
-		}*/
-
-		//GUILayout.EndArea ();
-
-	}
-}
+		}//switch		
+	}//OnGUI
+}//class
