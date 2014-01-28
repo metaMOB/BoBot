@@ -66,6 +66,7 @@ public class BoBot_ClimbRopeCollider : BoBot_ActionColliderGeneric {
 		
 	public override void release (){
 		base.release();
+		BoBotGlobal.animator.SetBool("hang", false);
 		chain = new List<BoBot_Chain_Element>();
 	}	
 	
