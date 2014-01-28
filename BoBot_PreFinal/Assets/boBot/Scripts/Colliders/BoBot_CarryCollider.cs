@@ -40,12 +40,15 @@ public class BoBot_CarryCollider : BoBot_ActionColliderGeneric {
 				BoBotGlobal.animator.SetBool("pull", false);
 				
 				//newPos.x = BoBotGlobal.character.transform.position.x + distanceToBobot.x*1.05f;
-			} else {
+			} else  if (direction == 0){
 				BoBotGlobal.animator.SetBool("push", false);
 				BoBotGlobal.animator.SetBool("pull", true);
 				factor = 1.1f;
 				//newPos.x = BoBotGlobal.character.transform.position.x + distanceToBobot.x*0.97f;
-			}	
+			} else {
+				BoBotGlobal.animator.SetBool("push", false);
+				BoBotGlobal.animator.SetBool("pull", false);
+			}
 			
 			BoBotGlobal.physics_velocity = new Vector3( BoBotGlobal.input_horizontalDirection /2f,0,0);
 			//this.otherRigid.AddForce ( Vector3.right * (BoBotGlobal.input_horizontalDirection) * factor );
@@ -107,7 +110,7 @@ public class BoBot_CarryCollider : BoBot_ActionColliderGeneric {
 	override public void bind(){
 		base.bind();
 		//Physics.IgnoreLayerCollision(8, 0, true);
-		Debug.Log ("name "+this.otherToUse.name);
+		//Debug.Log ("name "+this.otherToUse.name);
 		if (this.otherToUse.rigidbody){
 			this.otherRigid = this.otherToUse.rigidbody;
 		} else {
@@ -117,7 +120,7 @@ public class BoBot_CarryCollider : BoBot_ActionColliderGeneric {
 		mainCollider = BoBotGlobal.collider_mainCollider.transform;		
 		otherDistance = (otherToUse.ClosestPointOnBounds (mainCollider.position) - mainCollider.transform.position);
 		
-		Debug.Log ("di "+otherDistance.x);
+		//Debug.Log ("di "+otherDistance.x);
 		distanceToBobot = this.otherRigid.transform.position - BoBotGlobal.character.transform.position ;
 	}	
 	

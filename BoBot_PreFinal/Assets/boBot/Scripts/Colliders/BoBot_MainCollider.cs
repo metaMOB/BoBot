@@ -11,6 +11,7 @@ public class BoBot_MainCollider : MonoBehaviour {
 	private BoBot_DebugComponent debugInfo;
 	
 	private GameObject visual;
+	private string isBound = "";
 		
 	void Start () {		
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
@@ -95,12 +96,16 @@ public class BoBot_MainCollider : MonoBehaviour {
 	}
 	
 	public void bind (string name){
-		Debug.Log ("tryBind "+name);
+		//Debug.Log ("tryBind "+name);
 		sensors[name].bind();
+		isBound = sensors[name].sensorValueGroup;
 	}
 	
 	public void release (string name){
-		sensors[name].release();	
+		try {
+			sensors[name].release();	
+		} catch {}
+		isBound = "";
 	}
 	
 	public void moveVertical (string collider, float direction){			
@@ -133,12 +138,13 @@ public class BoBot_MainCollider : MonoBehaviour {
 				output += " "+sensor;
 			}
 		}
+		output += " bound "+isBound;
 		return output;
 	}
 	
 	public string sensorActive(string name){
 		foreach (BoBot_ActionColliderGeneric sensor in sensors.Values){
-			if (sensor.sensorValueGroup.Equals(name) && sensor.isUseable){
+			if ( (isBound.Equals("") || isBound.Equals(name)) && sensor.sensorValueGroup.Equals(name) && sensor.isUseable){
 				return sensor.sensorValue;	
 			}
 		}

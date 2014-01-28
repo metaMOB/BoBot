@@ -11,8 +11,9 @@ public class BoBot_ClimbEdgeCollider : BoBot_ActionColliderGeneric {
 	
 	void Awake () {		
 		this.reactOnTag = "canClimbEdge";
-		this.distance = new Rect(0.15f, 0.0f, 0.4f, 0.0001f);
-		this.distancePrepare = new Rect(0f, -0.1f, 1.6f, 1.5f);		
+		this.distance = new Rect(0.15f, 0.0f, 0.5f, 0.0001f);
+		this.distancePrepare = new Rect(-0.2f, -1.1f, 1.4f, 2.5f);		
+		//this.distancePrepare = new Rect(-1.4f, -1.1f, 2.8f, 2.5f);		
 		
 		//this.distance = new Rect(-0.55f, -0.1f, 1.1f, 0.05f);
 		//this.distancePrepare = new Rect(-2f, -0.1f, 4f, 1.5f);		
@@ -70,6 +71,7 @@ public class BoBot_ClimbEdgeCollider : BoBot_ActionColliderGeneric {
 	public override void release (){
 		base.release();
 		BoBotGlobal.animator.SetBool("canClimbEdge", false);
+		BoBotGlobal.animator.SetBool("hangedge", false);
 		BoBotGlobal.physics_isGravity = true;	
 		timerOff = 0f;
 	}	

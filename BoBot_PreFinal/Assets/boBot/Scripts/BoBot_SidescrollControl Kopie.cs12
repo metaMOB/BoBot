@@ -206,14 +206,12 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				BoBotGlobal.particleSystem.Stop();
 			}	
 			
-			if (BoBotGlobal.character.isGrounded || BoBotGlobal.activePlatform){
-				if ( BoBotGlobal.collider_mainCollider.sensorActive("control") != null){
-					return BoBotGlobal.state_control;
-				}
-				
-				if ( BoBotGlobal.collider_mainCollider.sensorActive("carry") != null){
-					return BoBotGlobal.state_carry;
-				}
+			if ( BoBotGlobal.collider_mainCollider.sensorActive("control") != null){
+				return BoBotGlobal.state_control;
+			}
+			
+			if ( BoBotGlobal.collider_mainCollider.sensorActive("carry") != null){
+				return BoBotGlobal.state_carry;
 			}
 			
 			/*if (BoBotGlobal.speed_fallSpeed > 2.0f){
@@ -459,25 +457,8 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 			string sensor = BoBotGlobal.collider_mainCollider.sensorActive("climb");
 			//Debug.Log ("sens "+sensor);
 			if (sensor != null){				
-				
-					
-				if (BoBotGlobal.input_horizontalDirectionShort != 0.0f){	
-					BoBotGlobal.physics_isGravity = true;
-					BoBotGlobal.collider_mainCollider.release(sensor);
-					BoBotGlobal.animator.SetFloat ("Direction", BoBotGlobal.input_horizontalDirectionShort);
-					
-					BoBotGlobal.physics_velocity = BoBotGlobal.character.velocity;
-					BoBotGlobal.physics_velocity.y += BoBotGlobal.speed_jumpSpeedUp*0.85f;
-					BoBotGlobal.physics_velocity.x += BoBotGlobal.speed_jumpSpeedForward*0.25f*BoBotGlobal.input_horizontalDirectionShort;
-					BoBotGlobal.animator.SetBool("hang", false);
-					BoBotGlobal.animator.SetBool("jump", true);
-					Debug.Log ("c1");
-					return BoBotGlobal.state_jumpToOtherLadder;
-				}
-				
-				if ( Mathf.Abs (BoBotGlobal.input_horizontalDirection) > BoBotGlobal.time_timeUntilShortInput){
+				if (BoBotGlobal.input_horizontalDirection != 0.0f){
 					BoBotGlobal.collider_mainCollider.moveHorizontal(sensor, BoBotGlobal.input_horizontalDirection);	
-					Debug.Log ("c2");
 					return BoBotGlobal.state_hang;
 				}
 				
@@ -486,7 +467,17 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 						return BoBotGlobal.state_climb; 
 					}
 				}
-				
+					
+				if (BoBotGlobal.input_horizontalDirectionShort != 0.0f){	
+					BoBotGlobal.physics_isGravity = true;
+					BoBotGlobal.animator.SetFloat ("Direction", BoBotGlobal.input_horizontalDirectionShort);
+					BoBotGlobal.collider_mainCollider.release(sensor);
+					BoBotGlobal.physics_velocity = BoBotGlobal.character.velocity;
+					BoBotGlobal.physics_velocity.y += BoBotGlobal.speed_jumpSpeedUp*0.85f;
+					BoBotGlobal.physics_velocity.x += BoBotGlobal.speed_jumpSpeedForward*0.25f*BoBotGlobal.input_horizontalDirectionShort;
+					BoBotGlobal.animator.SetBool("hang", false);
+					return BoBotGlobal.state_jumpToOtherLadder;
+				}
 			} else
 					
 			if (sensor == null){
@@ -747,7 +738,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				if ( BoBotGlobal.input_horizontalDirection != 0.0f){					
 					bool push = (direction < 0f && BoBotGlobal.input_horizontalDirection < 0f) || (direction > 0f && BoBotGlobal.input_horizontalDirection  > 0f);
 				
-					if ( push || (!push && BoBotGlobal.input_action > 0f)){	
+					if ( push || BoBotGlobal.input_action > 0f){	
 						BoBotGlobal.collider_mainCollider.bind("carry");
 						BoBotGlobal.collider_mainCollider.moveHorizontal(sensor, Convert.ToInt32(push));
 						return BoBotGlobal.state_carry;
@@ -759,9 +750,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 						BoBotGlobal.collider_mainCollider.release(sensor);
 						return BoBotGlobal.state_walk;
 					}
-				} else {
-					BoBotGlobal.collider_mainCollider.moveHorizontal(sensor, 0);	
-				}
+				}				
 			}
 			
 			BoBotGlobal.variable_actValueWalk = 0.0f;

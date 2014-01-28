@@ -7,8 +7,8 @@ public class BoBot_ClimbLadderCollider : BoBot_ActionColliderGeneric {
 	
 	void Awake () {
 		this.reactOnTag = "canClimb";
-		this.distance = new Rect(-0.15f, -0.15f, 0.3f, 0.3f);
-		this.distancePrepare = new Rect(0.15f, -0.1f, 2.0f, 1.5f);	
+		this.distance = new Rect(-0.05f, -0.15f, 0.1f, 0.3f);
+		this.distancePrepare = new Rect(-1.0f, -0.1f, 2.0f, 1.5f);	
 		this.prepareAnimationName = "canClimb";
 		this.sensorValue = "climbLadder";
 		this.sensorValueGroup = "climb";
@@ -40,5 +40,12 @@ public class BoBot_ClimbLadderCollider : BoBot_ActionColliderGeneric {
 	public override void bind(){
 		base.bind();
 		BoBotGlobal.animator.SetBool("hang", true);
+		BoBotGlobal.animator.SetBool("canClimb", true);
+	}
+	
+	public override void release(){
+		base.release();
+		BoBotGlobal.animator.SetBool("hang", false);
+		BoBotGlobal.animator.SetBool("canClimb", false);
 	}
 }
