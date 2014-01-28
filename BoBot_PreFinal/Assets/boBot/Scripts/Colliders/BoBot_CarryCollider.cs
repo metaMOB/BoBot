@@ -16,8 +16,10 @@ public class BoBot_CarryCollider : BoBot_ActionColliderGeneric {
 			
 	void Awake () {		
 		this.reactOnTag = "canCarry";
-		this.distance = new Rect(0.35f, -0.45f, 0.2f, 0.5f);
+		this.distance = new Rect(0.15f, -0.45f, 0.6f, 0.75f);
+	//	this.distancePrepare = new Rect(0.15f, -0.45f, 0.6f, 0.75f);	
 		this.sensorValue = "carry";
+	//	this.prepareAnimationName = "canCarry";
 		this.sensorValueGroup = "carry";
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
 
@@ -43,16 +45,16 @@ public class BoBot_CarryCollider : BoBot_ActionColliderGeneric {
 			} else  if (direction == 0){
 				BoBotGlobal.animator.SetBool("push", false);
 				BoBotGlobal.animator.SetBool("pull", true);
-				factor = 1.1f;
+				//factor = 1.1f;
 				//newPos.x = BoBotGlobal.character.transform.position.x + distanceToBobot.x*0.97f;
 			} else {
 				BoBotGlobal.animator.SetBool("push", false);
 				BoBotGlobal.animator.SetBool("pull", false);
 			}
 			
-			BoBotGlobal.physics_velocity = new Vector3( BoBotGlobal.input_horizontalDirection /2f,0,0);
+			BoBotGlobal.physics_velocity = new Vector3( BoBotGlobal.input_horizontalDirection * 0.7f,0,0);
 			//this.otherRigid.AddForce ( Vector3.right * (BoBotGlobal.input_horizontalDirection) * factor );
-			this.otherRigid.velocity = ( Vector3.right * (BoBotGlobal.input_horizontalDirection / 2f)  );
+			this.otherRigid.velocity = ( Vector3.right * (BoBotGlobal.input_horizontalDirection * 0.7f)  );
 			//this.otherRigid.MovePosition ( this.otherRigid.transform.position + Vector3.right * ((BoBotGlobal.input_horizontalDirection * Time.deltaTime) / 2f) * factor);
 			
 			Vector3 newPos = this.otherRigid.transform.position;

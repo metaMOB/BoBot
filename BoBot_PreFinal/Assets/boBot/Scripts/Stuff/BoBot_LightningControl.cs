@@ -15,7 +15,11 @@ public class BoBot_LightningControl : MonoBehaviour {
 	public float timeBetween = 15f;
 	public float speed = 1f;
 	public float varianz = 0f;
-	public float lightning = 0f;
+	
+	public float growlVolume = 1f;
+	public float thunderVolume = 0.7f;
+	
+	private float lightning = 0f;
 	
 	private int actLayer = -1;
 	
@@ -26,8 +30,13 @@ public class BoBot_LightningControl : MonoBehaviour {
 	private int numOfFlashes = 1;
 	private int flashNum = 0;
 	
+	private int minFlashes = 1;
+	private int maxFlashes = 1;
+	
 	private int oldFlashNumber = 0;
 	private int oldGrowlNumber = 0;
+	
+	public bool noSound = false;
 	
 	// Use this for initialization
 	void Awake () {
@@ -83,10 +92,11 @@ public class BoBot_LightningControl : MonoBehaviour {
 							number = Mathf.FloorToInt ( Random.value * lightningSounds.Length);
 						} while (number == oldFlashNumber); 
 						oldFlashNumber = number;						
-						setSound (lightningSounds[number]);
+						if (!noSound){
+							setSound (lightningSounds[number], thunderVolume);
+						}
 					
-					
-						workSpeed = speed + Mathf.FloorToInt ( Random.value * (speed/varianz) * 2) - (speed/varianz) ;
+						workSpeed = speed + Mathf.FloorToInt ( Random.value * (speed*varianz) * 2) - (speed*varianz) ;
 						flashNum++;
 					}
 					
@@ -95,11 +105,12 @@ public class BoBot_LightningControl : MonoBehaviour {
 						do {
 							number = Mathf.FloorToInt ( Random.value * growlSounds.Length);
 						} while (number == oldGrowlNumber); 
-						oldGrowlNumber = number;						
-						setSound (lightningSounds[number]);
+						oldGrowlNumber = number;	
 					
+					//	setSound (lightningSounds[number]);
 					
-						setSound (growlSounds[number]);
+						
+						setSound (growlSounds[number], growlVolume);
 					}
 					
 				
@@ -114,7 +125,7 @@ public class BoBot_LightningControl : MonoBehaviour {
 				lightning = 0f;
 				actLayer = -1;
 				workSpeed = speed;				
-				numOfFlashes = Mathf.CeilToInt ( Random.value * 3) +1;	
+				numOfFlashes = Mathf.CeilToInt ( Random.value * maxFlashes) +minFlashes;	
 				flashNum = 0;
 			}
 			
@@ -122,30 +133,36 @@ public class BoBot_LightningControl : MonoBehaviour {
 		}
 	}
 	
-	private void setSound (AudioClip clip){
-		int number = Mathf.FloorToInt ( Random.value * lightningSounds.Length);				
-		bool running = false;
-		foreach (AudioSource source in lightningSoundSources){
-			if (!source.isPlaying){
-				source.clip = clip;
-				source.loop = false;
-				source.Play();
-				running = true;
-				break;
+	private void setSound (AudioClip clip, float vol){
+			int number = Mathf.FloorToInt ( Random.value * lightningSounds.Length);				
+			bool running = false;
+			foreach (AudioSource source in lightningSoundSources){
+				if (!source.isPlaying){
+					source.clip = clip;
+					source.loop = false;
+					source.volume = vol;
+					source.Play();
+					running = true;
+					break;
+				}
 			}
-		}
+			
+			if (!running){
+				 	AudioSource src = gameObject.AddComponent<AudioSource>();
+					src.clip = clip;
+					src.loop = false;
+					src.Play();
+					lightningSoundSources.Add (src);
+			}
 		
-		if (!running){
-			 	AudioSource src = gameObject.AddComponent<AudioSource>();
-				src.clip = clip;
-				src.loop = false;
-				src.Play();
-				lightningSoundSources.Add (src);
-		}
 	}
 	
-	public void setLightning (float timeBetween, float varianz){
+	public void setLightning (float timeBetween, float varianz, bool noSound, int minFlashes, int maxFlashes){
 		this.timeBetween = timeBetween;
 		this.varianz = varianz;		
+		this.noSound = noSound;
+		this.minFlashes = minFlashes;
+		this.maxFlashes = maxFlashes;
+		numOfFlashes = Mathf.CeilToInt ( Random.value * maxFlashes) +minFlashes;	
 	}	
 }

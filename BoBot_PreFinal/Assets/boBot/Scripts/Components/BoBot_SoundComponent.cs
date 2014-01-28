@@ -1,20 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent (typeof (BoBot_BasicPhysicsComponent))]
+
 public class BoBot_SoundComponent : MonoBehaviour {
 	
 	public AudioClip horizontalMoveSound;
 	public AudioClip horizontalHitSound;
 	public AudioClip verticalHitSound;
 	
+	public AudioClip horizontalMoveBeginSound;
+	public AudioClip horizontalMoveEndSound;
+	
 	public float verticalHitGate = 0.3f;
 	public float horizontalMovingGate = 0.01f;
 	public float horizontalHitGate = 0.01f;
 	
-	private AudioSource audioSourceHorizontalMove;
+	public float volume = 0.5f;
+	
+	private AudioSource audioSourceHorizontalMoveLoop;
+	private AudioSource audioSourceHorizontalMoveEnd;
+	private AudioSource audioSourceHorizontalMoveBegin;
+	
 	private AudioSource audioSourceHorizontalHit;
 	private AudioSource audioSourceVerticalHit;
+	
+	
+	
+	private bool isHorizontalMoving;
+	private bool isVerticalMoveing;
+	
+	private List<AudioClip> currentHorizontalMoveSound = new List<AudioClip>();
 	
 	private BoBot_BasicPhysicsComponent basicPhysics;
 	
@@ -24,6 +41,7 @@ public class BoBot_SoundComponent : MonoBehaviour {
 //	private Vector3 lastDelta = Vector3.zero;
 //	private Vector3 deltaTwo;
 	private BoBot_DebugComponent debugInfo;
+	//private List<
 
 	// Use this for initialization
 		
@@ -32,17 +50,51 @@ public class BoBot_SoundComponent : MonoBehaviour {
 		//rigid = gameObject.rigidbody.transform;
 		//lastPos = rigid.position;
 		
-		audioSourceHorizontalMove = gameObject.AddComponent<AudioSource>();
+		audioSourceHorizontalMoveLoop = gameObject.AddComponent<AudioSource>();
+		audioSourceHorizontalMoveEnd = gameObject.AddComponent<AudioSource>();
+		audioSourceHorizontalMoveBegin = gameObject.AddComponent<AudioSource>();
 		audioSourceHorizontalHit = gameObject.AddComponent<AudioSource>();
 		audioSourceVerticalHit = gameObject.AddComponent<AudioSource>();
 		
-		audioSourceHorizontalMove.clip = horizontalMoveSound;
+		audioSourceHorizontalMoveLoop.clip = horizontalMoveSound;
+		audioSourceHorizontalMoveEnd.clip = horizontalMoveEndSound;
+		audioSourceHorizontalMoveBegin.clip = horizontalMoveBeginSound;
+		
+		audioSourceHorizontalMoveLoop.playOnAwake = true;
+		audioSourceHorizontalMoveEnd.playOnAwake = false;
+		audioSourceHorizontalMoveBegin.playOnAwake = false;
+		
+			
 		audioSourceHorizontalHit.clip = horizontalHitSound;
 		audioSourceVerticalHit.clip = verticalHitSound;
-		audioSourceVerticalHit.volume = 10;
+		audioSourceHorizontalHit.playOnAwake = false;
+		audioSourceVerticalHit.playOnAwake = false;
+		
+		
+		audioSourceVerticalHit.volume = volume;
+		
+		audioSourceHorizontalMoveLoop.volume = volume;
+		audioSourceHorizontalMoveEnd.volume = volume;
+		audioSourceHorizontalMoveBegin.volume = volume;
+		
+		audioSourceHorizontalMoveLoop.dopplerLevel = 0;
+		audioSourceHorizontalMoveEnd.dopplerLevel = 0;
+		audioSourceHorizontalMoveBegin.dopplerLevel = 0;
+		
+		audioSourceHorizontalMoveLoop.loop = true;
+		audioSourceHorizontalMoveEnd.loop = false;
+		audioSourceHorizontalMoveBegin.loop = false;
+		
+		audioSourceHorizontalHit.dopplerLevel = 0;
+		audioSourceVerticalHit.dopplerLevel = 0;
+				
 	//	Debug.Log ("ssadsd "+gameObject.name);
 		basicPhysics = gameObject.GetComponent<BoBot_BasicPhysicsComponent>();
 		//Debug.Log (basicPhysics);
+		if (!horizontalMoveBeginSound || !horizontalMoveEndSound){
+			audioSourceHorizontalMoveLoop.loop = true;
+			audioSourceHorizontalMoveLoop.Play();
+		}
 	}
 	
 	// Update is called once per frame
@@ -51,23 +103,17 @@ public class BoBot_SoundComponent : MonoBehaviour {
 			debugInfo.addText ("SoundComponent");
 			//debugInfo.addText ("> Delta2 "+(deltaTwo.x).ToString("#0.##")+ "/"+(deltaTwo.y).ToString("#0.##"));
 			
-			debugInfo.addText ("> Ply Move "+audioSourceHorizontalMove.isPlaying);
-			debugInfo.addText ("> Vol Move "+(audioSourceHorizontalMove.volume).ToString("0.00"));
+			debugInfo.addText ("> Ply Move "+audioSourceHorizontalMoveLoop.isPlaying);
+			debugInfo.addText ("> Vol Move "+(audioSourceHorizontalMoveLoop.volume).ToString("0.00"));
 			debugInfo.addText ("> Ply Move "+audioSourceVerticalHit.isPlaying);
 			debugInfo.addText ("> Vol Move "+(audioSourceVerticalHit.volume).ToString("0.00"));
 		}
+		
+		
 	}
 	
 	void FixedUpdate () {
-		//Vector3 delta = rigid.position - lastPos;
-		//deltaTwo = delta - lastDelta;
-		try {
-			//audioSourceHorizontalMove.volume = Mathf.Abs(basicPhysics.delta.x*50);
-		}
-		
-		catch {
-			Debug.Log ("error "+gameObject.name);	
-		}
+		float absDeltaX = Mathf.Abs(basicPhysics.delta.x);
 			
 		if (basicPhysics.deltaTwo.y > verticalHitGate && !audioSourceVerticalHit.isPlaying){			
 			audioSourceVerticalHit.loop = false;
@@ -78,22 +124,23 @@ public class BoBot_SoundComponent : MonoBehaviour {
 			audioSourceHorizontalHit.loop = false;
 			audioSourceHorizontalHit.Play();
 		}
-		//Debug.Log ("vh "+ gameObject.name +"  "+basicPhysics.deltaTwo.y);
 		
-		if (basicPhysics.delta.x < -horizontalMovingGate || basicPhysics.delta.x > horizontalMovingGate){
-			if (!audioSourceHorizontalMove.isPlaying ){ //&& gameObject.rigidbody.useGravity){
-			//Debug.Log ("play");
-				audioSourceHorizontalMove.loop = true;				
-				audioSourceHorizontalMove.Play();
-			} 
-		} else if (audioSourceHorizontalMove.isPlaying){
-			//Debug.Log ("stop");
-			//audioSourceHorizontalMove.Stop();
-			audioSourceHorizontalMove.loop = false;			
+		if (absDeltaX > horizontalMovingGate){
+			if (!isHorizontalMoving){
+				isHorizontalMoving = true;
+				if (horizontalMoveBeginSound && horizontalMoveEndSound){
+					audioSourceHorizontalMoveBegin.Play();
+					audioSourceHorizontalMoveLoop.PlayDelayed(horizontalMoveBeginSound.length);
+				}
+			}
+		} else if (absDeltaX < horizontalMovingGate){
+			if (isHorizontalMoving){
+				isHorizontalMoving = false;
+				if (horizontalMoveBeginSound && horizontalMoveEndSound){
+					audioSourceHorizontalMoveLoop.Stop ();
+					audioSourceHorizontalMoveEnd.Play();
+				}
+			} 			
 		}
-		//lastPos = rigid.position;
-		//lastDelta = delta;		
-	}
-	
-	
+	}	
 }

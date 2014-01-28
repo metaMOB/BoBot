@@ -6,7 +6,7 @@ public class BoBot_Rain : MonoBehaviour {
 	// Use this for initialization
 	private AudioSource snd;
 	public AudioClip rainSound;
-	public float intesity = 0.5f;
+	public float intesity;
 	
 	public float maxVolume = 0.5f;
 	public float maxParticles = 500f;
@@ -15,13 +15,17 @@ public class BoBot_Rain : MonoBehaviour {
 	private ParticleSystem rain;
 	private float intensityDelta = 0.5f;
 	
+	private float deltaTime;
+	
 	void Start () {
 		snd = gameObject.AddComponent<AudioSource>();
 		rain = gameObject.GetComponent<ParticleSystem>();
 		snd.clip = rainSound;
 		snd.volume = intesity;
 		snd.loop = true;
-		snd.Play();
+		//snd.Play();
+		intesity = 0;
+		deltaTime = 0.5f;
 		actIntensity = intesity;
 		
 		snd.volume = intensityDelta * maxVolume;
@@ -30,10 +34,37 @@ public class BoBot_Rain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (actIntensity != intesity){
-			intensityDelta = Mathf.SmoothDamp( intensityDelta, intesity, ref actIntensity, 0.5f);
+		//Debug.Log ("rain "+intesity+ "   "+intensityDelta+"   "+actIntensity);
+		if (actIntensity > 0){
+			if (!snd.isPlaying){
+				snd.Play();
+			}
+			
+			if (!rain.isPlaying){
+				rain.Play();	
+			}
+		}
+		
+		if (intensityDelta != intesity){
+			intensityDelta = Mathf.SmoothDamp( intensityDelta, intesity, ref actIntensity, deltaTime);
 			snd.volume = intensityDelta * maxVolume;
 			rain.emissionRate = intensityDelta * maxParticles;
 		}
+		
+		if (actIntensity == 0){
+			if (snd.isPlaying){
+				snd.Stop();
+			}
+			
+			if (rain.isPlaying){
+				rain.Stop();	
+			}
+		}
+	}
+	
+	public void setIntensity (float newIntensity, float newDeltaTime){
+		Debug.Log ("new rain "+newIntensity);
+		this.intesity = newIntensity;
+		this.deltaTime = newDeltaTime;
 	}
 }
