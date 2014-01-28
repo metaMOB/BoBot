@@ -299,6 +299,10 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 			} else {
 				BoBotGlobal.particleSystem.Stop();
 			}
+			
+			if ( BoBotGlobal.collider_mainCollider.sensorActive("carry") != null){
+				return BoBotGlobal.state_carry;
+			}
 							
 			string sensor = BoBotGlobal.collider_mainCollider.sensorActive("climb");
 			if ((!BoBotGlobal.character.isGrounded && !BoBotGlobal.activePlatform) && sensor != null){				
