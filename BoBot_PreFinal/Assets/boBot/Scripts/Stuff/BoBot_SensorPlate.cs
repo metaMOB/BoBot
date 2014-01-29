@@ -11,7 +11,8 @@ public class BoBot_SensorPlate : MonoBehaviour {
 	public bool onlyOn = true;
 	public float delayOn = 1f;
 	public float delayOff = 5f;
-	public List<string> objectName = new List<string>();
+	public List<GameObject> objects = new List<GameObject>();
+	private List<string> objectName = new List<string>();
 	
 	public AudioClip enterSound;
 	public AudioClip onSound;
@@ -35,6 +36,10 @@ public class BoBot_SensorPlate : MonoBehaviour {
 			foreach (BoBot_ControlComponent cmp in cmps){
 				controllers.Add(cmp);
 			}		
+		}
+		
+		foreach (GameObject obj in objects){
+			objectName.Add(obj.name);
 		}
 	}
 	
