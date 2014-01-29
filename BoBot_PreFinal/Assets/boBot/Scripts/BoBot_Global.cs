@@ -69,6 +69,7 @@ public static class BoBotGlobal {
 		public static float time_timeTillCarry = 1.5f;
 		public static float time_timeTillIdleClimbJump = 0.25f; // 0 to 1 Second
 		public static float time_timeUntilShortInput = 0.25f;
+		public static float time_timeTillReload = 5f;		
 		
 		public static float multiplier_inAirMultiplier = 0.05f;	
 		public static float multiplier_onGroundX = 0.85f;

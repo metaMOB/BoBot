@@ -46,8 +46,8 @@ public class BoBot_ActionColliderGeneric : MonoBehaviour {
 			if (distance.Contains(distancePosititon)){ 		
 				
 				if (other.collider.CompareTag("canControl")){
-			Debug.Log(distancePosititon);
-			Debug.Log ("edge "+ distanceRelative.x +" // "+distanceRelative.y);
+		//	Debug.Log(distancePosititon);
+		//	Debug.Log ("edge "+ distanceRelative.x +" // "+distanceRelative.y);
 		}
 				
 				isActive = true;

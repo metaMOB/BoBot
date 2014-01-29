@@ -5,7 +5,7 @@ public class AspectUtility : MonoBehaviour {
 
 	public float _wantedAspectRatio = 1.5f;
 	public bool landscapeModeOnly = true;
-	static public bool _landscapeModeOnly = true;
+	static public bool _landscapeModeOnly = false;
     static float wantedAspectRatio;
     static Camera cam;
     static Camera backgroundCam;

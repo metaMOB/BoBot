@@ -179,6 +179,9 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 	private List<GameObject> debugObjects = new List<GameObject>();
 	
 	private bool heIsDeadJim = false;
+	private SceneFader sceneFader;
+	
+	private float deathTimer = 0; 
 	
 	public class Idle : BoBot_FSMState
 	{			
@@ -861,7 +864,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 	
 	void Start()
 	{		
-		
+		sceneFader = GameObject.FindGameObjectWithTag ("GameController").GetComponent<SceneFader> ();
 		//Application.targetFrameRate = 25;
 		
 		Physics.IgnoreLayerCollision (0,1);
@@ -944,6 +947,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 		}
 		
 		BoBotGlobal.physics_isGravity = true;		
+		
 	}
 		
 	void OnEndGame()
@@ -1000,6 +1004,11 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				BoBotGlobal.animator.SetBool("deadBody", true);
 				BoBotGlobal.physics_isGravity = true;
 				BoBotGlobal.physics_velocity = Vector3.zero;
+				deathTimer += Time.deltaTime;
+				if (deathTimer > BoBotGlobal.time_timeTillReload){
+					deathTimer = 0f;
+					sceneFader.SwitchScene (Save_Load.ar_Player[1].ToString());
+				}
 			} else {
 				
 				if (BoBotGlobal.activePlatform != null) {

@@ -49,7 +49,8 @@ public class BoBot_Rain : MonoBehaviour {
 			}
 		}
 		
-		if (intensityDelta != intesity){
+		//if (intensityDelta != intesity){
+		if ( Mathf.Abs(actIntensity) > 0.01){
 			intensityDelta = Mathf.SmoothDamp( intensityDelta, intesity, ref actIntensity, deltaTime);
 			snd.volume = intensityDelta * maxVolume;
 			rain.emissionRate = intensityDelta * maxParticles;
