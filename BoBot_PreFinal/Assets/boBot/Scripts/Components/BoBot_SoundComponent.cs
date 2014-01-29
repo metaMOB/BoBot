@@ -19,6 +19,8 @@ public class BoBot_SoundComponent : MonoBehaviour {
 	
 	public float mainVolume = 0.5f;
 	
+	public bool horizontalIsVertical = false;
+	
 	private AudioSource audioSourceHorizontalMoveLoop;
 	private AudioSource audioSourceHorizontalMoveEnd;
 	private AudioSource audioSourceHorizontalMoveBegin;
@@ -120,14 +122,26 @@ public class BoBot_SoundComponent : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		float absDeltaX = Mathf.Abs(basicPhysics.delta.x);
+		float absDeltaX;
+		float deltaTwoX;
+		float deltaTwoY;
+		
+		if (!horizontalIsVertical){
+			absDeltaX = Mathf.Abs(basicPhysics.delta.x);
+			deltaTwoX = basicPhysics.deltaTwo.x;
+			deltaTwoY = basicPhysics.deltaTwo.y;
+		} else {
+			absDeltaX = Mathf.Abs(basicPhysics.delta.y);
+			deltaTwoX = basicPhysics.deltaTwo.y;
+			deltaTwoY = basicPhysics.deltaTwo.x;
+		}
 			
-		if (basicPhysics.deltaTwo.y > verticalHitGate && !audioSourceVerticalHit.isPlaying){			
+		if (deltaTwoY > verticalHitGate && !audioSourceVerticalHit.isPlaying){			
 			audioSourceVerticalHit.loop = false;
 			audioSourceVerticalHit.Play();
 		} 
 		
-		if ( Mathf.Abs(basicPhysics.deltaTwo.x) > horizontalHitGate && !audioSourceHorizontalHit.isPlaying){			
+		if ( Mathf.Abs(deltaTwoX) > horizontalHitGate && !audioSourceHorizontalHit.isPlaying){			
 			audioSourceHorizontalHit.loop = false;
 			audioSourceHorizontalHit.Play();
 		}
