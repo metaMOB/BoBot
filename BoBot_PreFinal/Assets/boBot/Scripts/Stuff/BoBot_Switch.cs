@@ -52,10 +52,11 @@ public class BoBot_Switch : MonoBehaviour {
 				controlComponents.Add(cmp);
 			}			
 			
+			/*
 			cmps = obj.GetComponentsInChildren<BoBot_ControlComponent>();
 			foreach (BoBot_ControlComponent cmp in cmps){
 				controlComponents.Add(cmp);
-			}		
+			}*/		
 		}
 				
 		riddle = currObj.GetComponent<BoBot_RiddleComponent>();
