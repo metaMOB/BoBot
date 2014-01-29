@@ -9,6 +9,9 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 	private AudioSource sndA;
 	private AudioSource sndB;
 	
+	private float volA;
+	private float volB;
+	
 	private float fadeVolume;
 	private float currentVelocity;
 	private float timeFade = 1f;
@@ -24,8 +27,11 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 		sndA.volume = 0;
 		sndB.volume = 0;
 		
+		volA = 0;
+		volB = 0;
+		
 		if (sound){
-			setNewSound (sound, 2);
+			setNewSound (sound, 2, 1);
 		}
 	}
 	
@@ -34,8 +40,8 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 		fadeVolume = Mathf.SmoothDamp (fadeVolume, target, ref currentVelocity, timeFade);
 		
 		if ( Mathf.Abs(currentVelocity) > 0.01){
-			sndB.volume = volume * fadeVolume;
-			sndA.volume = volume * (1f-fadeVolume);
+			sndB.volume = volume * fadeVolume * volB;
+			sndA.volume = volume * (1f-fadeVolume) * volA;
 		} else {
 			if (sndA.isPlaying && sndA.volume < 0.1f){
 				sndA.Stop();	
@@ -46,14 +52,16 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 		
 	}
 	
-	public void setNewSound (AudioClip newSound, float timeToFade){
+	public void setNewSound (AudioClip newSound, float timeToFade, float vol){
 		if (fadeVolume < 0.1f ){
 			sndB.clip = newSound;
 			sndB.Play();
+			volB = vol;
 			target = 1f;
 		} else if (fadeVolume > 0.9f ){
 			sndA.clip = newSound;
 			sndA.Play();
+			volA = vol;
 			target = 0;
 		}
 	}

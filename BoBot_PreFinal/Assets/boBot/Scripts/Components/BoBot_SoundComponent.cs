@@ -17,7 +17,7 @@ public class BoBot_SoundComponent : MonoBehaviour {
 	public float horizontalMovingGate = 0.01f;
 	public float horizontalHitGate = 0.01f;
 	
-	public float volume = 0.5f;
+	public float mainVolume = 0.5f;
 	
 	private AudioSource audioSourceHorizontalMoveLoop;
 	private AudioSource audioSourceHorizontalMoveEnd;
@@ -66,9 +66,9 @@ public class BoBot_SoundComponent : MonoBehaviour {
 		audioSourceHorizontalMoveEnd.playOnAwake = false;
 		audioSourceHorizontalMoveBegin.playOnAwake = false;
 		
-		audioSourceHorizontalMoveLoop.minDistance = 0.1f;
-		audioSourceHorizontalMoveEnd.minDistance = 0.1f;
-		audioSourceHorizontalMoveBegin.minDistance = 0.1f;
+		audioSourceHorizontalMoveLoop.minDistance = 1.0f;
+		audioSourceHorizontalMoveEnd.minDistance = 1f;
+		audioSourceHorizontalMoveBegin.minDistance = 1f;
 		
 		audioSourceHorizontalHit.clip = horizontalHitSound;
 		audioSourceVerticalHit.clip = verticalHitSound;
@@ -78,11 +78,11 @@ public class BoBot_SoundComponent : MonoBehaviour {
 		audioSourceVerticalHit.minDistance = 0.1f;
 		
 		
-		audioSourceVerticalHit.volume = volume;
+		audioSourceVerticalHit.volume = mainVolume;
 		
-		audioSourceHorizontalMoveLoop.volume = volume;
-		audioSourceHorizontalMoveEnd.volume = volume;
-		audioSourceHorizontalMoveBegin.volume = volume;
+		audioSourceHorizontalMoveLoop.volume = mainVolume;
+		audioSourceHorizontalMoveEnd.volume = mainVolume;
+		audioSourceHorizontalMoveBegin.volume = mainVolume;
 		
 		audioSourceHorizontalMoveLoop.dopplerLevel = 0;
 		audioSourceHorizontalMoveEnd.dopplerLevel = 0;

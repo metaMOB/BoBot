@@ -8,6 +8,8 @@ public class BoBot_EnvironmentTag : MonoBehaviour {
 	private BoBot_AmbienceControl ambienceController;
 	
 	public AudioClip nextAmbientSound;
+	public float nextAmbientSoundVolume;
+	
 	public float fadeTime = 5f;
 	public float timeBeetween = 0f;
 	public float varianz = 0f;
@@ -47,7 +49,7 @@ public class BoBot_EnvironmentTag : MonoBehaviour {
 			//varianzOld = controller.varianz;
 			controller.setLightning(timeBeetween, varianz, noSound, minFlashes, maxFlashes);
 			rain.setIntensity(rainIntensity, rainDeltaTime); 
-			ambienceController.setNewSound (nextAmbientSound, fadeTime);
+			ambienceController.setNewSound (nextAmbientSound, fadeTime, nextAmbientSoundVolume);
 		}
 	}
 	
