@@ -25,11 +25,11 @@ public class BoBot_GearComponent : BoBot_OnOffComponent {
 		connectedRotation = Vector3.zero;
 		gearSoundRun = gameObject.AddComponent<AudioSource>();
 		gearSoundRun.clip = audioRunning;
-		gearSoundRun.minDistance = 0.1f;
+		gearSoundRun.minDistance = 0.4f;
 			
 		gearSoundStop = gameObject.AddComponent<AudioSource>();
 		gearSoundStop.clip = audioStop;
-		gearSoundStop.minDistance = 0.1f;
+		gearSoundStop.minDistance = 0.4f;
 		
 		if (connectedGear){
 			connGear = connectedGear.GetComponent<BoBot_GearComponent>();
