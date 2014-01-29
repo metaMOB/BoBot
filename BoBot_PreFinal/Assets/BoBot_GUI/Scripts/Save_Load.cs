@@ -5,17 +5,17 @@ using System.IO;
 public class Save_Load : MonoBehaviour {
 
 	
-	static string savings_Datei = Application.persistentDataPath + "\\boBot\\Gamesave\\Player\\savings.hvt";
+	static string savings_Datei = Application.persistentDataPath + "//boBot//Gamesave//Player//savings.hvt";
 	public static ArrayList ar_Player = new ArrayList();
 	public static ArrayList ar_newPlayer = new ArrayList();
 	public static ArrayList ar = new ArrayList();
 	
 	public static void Save_Directory(){
 		
-		if(!Directory.Exists(Application.persistentDataPath + "\\boBot\\Gamesave")){
-			Directory.CreateDirectory(Application.persistentDataPath + "\\boBot\\Gamesave");
-			Directory.CreateDirectory(Application.persistentDataPath + "\\boBot\\Gamesave\\Player");
-			Directory.CreateDirectory(Application.persistentDataPath + "\\boBot\\Gamesave\\Game");
+		if(!Directory.Exists(Application.persistentDataPath + "//boBot//Gamesave")){
+			Directory.CreateDirectory(Application.persistentDataPath + "//boBot//Gamesave");
+			Directory.CreateDirectory(Application.persistentDataPath + "//boBot//Gamesave//Player");
+			Directory.CreateDirectory(Application.persistentDataPath + "//boBot//Gamesave//Game");
 		}
 		else{
 			if(File.Exists(savings_Datei)){
