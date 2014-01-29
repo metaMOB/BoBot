@@ -50,31 +50,6 @@ public class BoBot_LightningControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (timeBetween > 0){
-			/*if (timer == 0f){
-				Debug.Log ("sound!!");
-				int number = Mathf.FloorToInt ( Random.value * lightningSounds.Length);				
-				bool running = false;
-				foreach (AudioSource source in lightningSoundSources){
-					if (!source.isPlaying){
-						source.clip = lightningSounds[number];
-						source.loop = false;
-						source.Play();
-						running = true;
-						break;
-					}
-				}
-				
-				if (!running){
-					 	AudioSource src = gameObject.AddComponent<AudioSource>();
-						src.clip = lightningSounds[number];
-						src.loop = false;
-						src.Play();
-						lightningSoundSources.Add (src);
-				}
-				
-				
-				
-			}*/
 			
 			timer += Time.deltaTime;
 			lightning += Time.deltaTime;
@@ -157,12 +132,15 @@ public class BoBot_LightningControl : MonoBehaviour {
 		
 	}
 	
-	public void setLightning (float timeBetween, float varianz, bool noSound, int minFlashes, int maxFlashes){
+	public void setLightning (float timeBetween, float varianz, bool noSound, int minFlashes, int maxFlashes, float growlVolume, float thunderVolume){
 		this.timeBetween = timeBetween;
 		this.varianz = varianz;		
 		this.noSound = noSound;
 		this.minFlashes = minFlashes;
 		this.maxFlashes = maxFlashes;
+		this.growlVolume = growlVolume;
+		this.thunderVolume = thunderVolume;
+		
 		numOfFlashes = Mathf.CeilToInt ( Random.value * maxFlashes) +minFlashes;	
 	}	
 }

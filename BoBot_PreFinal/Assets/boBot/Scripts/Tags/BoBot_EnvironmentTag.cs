@@ -9,6 +9,8 @@ public class BoBot_EnvironmentTag : MonoBehaviour {
 	
 	public AudioClip nextAmbientSound;
 	public float nextAmbientSoundVolume;
+	public float growlVolume;
+	public float thunderVolume;	
 	
 	public float fadeTime = 5f;
 	public float timeBeetween = 0f;
@@ -47,7 +49,7 @@ public class BoBot_EnvironmentTag : MonoBehaviour {
 		if (other.CompareTag("Player")){
 			//timeBeetweenOld = controller.timeBetween;
 			//varianzOld = controller.varianz;
-			controller.setLightning(timeBeetween, varianz, noSound, minFlashes, maxFlashes);
+			controller.setLightning(timeBeetween, varianz, noSound, minFlashes, maxFlashes, growlVolume, thunderVolume);
 			rain.setIntensity(rainIntensity, rainDeltaTime); 
 			ambienceController.setNewSound (nextAmbientSound, fadeTime, nextAmbientSoundVolume);
 		}

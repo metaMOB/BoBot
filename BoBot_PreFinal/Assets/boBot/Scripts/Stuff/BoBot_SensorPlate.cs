@@ -13,12 +13,7 @@ public class BoBot_SensorPlate : MonoBehaviour {
 	public float delayOff = 5f;
 	public List<GameObject> objects = new List<GameObject>();
 	private List<string> objectName = new List<string>();
-	
-	public AudioClip enterSound;
-	public AudioClip onSound;
-	public AudioClip offSound;
-	public AudioClip exitSound;
-	
+		
 	private int numElements = 0;
 	private float timer = 0f;
 	private float timerOff = 0f;
