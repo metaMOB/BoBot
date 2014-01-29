@@ -11,7 +11,7 @@ public class BoBot_SensorPlate : MonoBehaviour {
 	public bool onlyOn = true;
 	public float delayOn = 1f;
 	public float delayOff = 5f;
-	public string objectName;
+	public List<string> objectName = new List<string>();
 	
 	public AudioClip enterSound;
 	public AudioClip onSound;
@@ -78,7 +78,7 @@ public class BoBot_SensorPlate : MonoBehaviour {
 	}
 	
 	void OnTriggerStay (Collider other){
-		if (objectName == "" || other.name.Equals (objectName)){
+		if (objectName.Count == 0 ||  objectName.Contains(other.name)){
 			numElements++;			
 			running = true;
 		}

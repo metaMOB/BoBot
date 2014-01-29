@@ -65,5 +65,10 @@ public class BoBot_Rain : MonoBehaviour {
 		Debug.Log ("new rain "+newIntensity);
 		intesity = newIntensity;
 		deltaTime = newDeltaTime;
+		
+		try {
+			snd.Play();
+			rain.Play();
+		} catch {}
 	}
 }
