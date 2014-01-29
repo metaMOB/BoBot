@@ -6,13 +6,18 @@ public class BoBot_Saw : MonoBehaviour {
 	// Use this for initialization
 	public ParticleSystem [] particles;
 	public AudioClip sawingSound;
+	public float volume = 0.5f;
 	
 	private BoBot_BasicPhysicsComponent phys;
 	private Vector3 partPos = Vector3.zero;
+	private AudioSource snd;
 	
 	void Start () {
 		phys = gameObject.GetComponent<BoBot_BasicPhysicsComponent>();
 		//Physics.IgnoreLayerCollision(0, 12);
+		snd = gameObject.AddComponent<AudioSource>();
+		snd.minDistance = 0.1f;
+		snd.volume = volume;
 		foreach (ParticleSystem particle in particles){
 			particle.Stop();
 		}
@@ -42,13 +47,8 @@ public class BoBot_Saw : MonoBehaviour {
 	
 	void OnTriggerStay(Collider other){
 		if (!other.name.Equals("_collider")){
-			//Debug.Log ("lkjlkjlkjlk "+other.gameObject.name + "  "+gameObject.GetComponent<BoBot_BasicPhysicsComponent>().delta);	
-			partPos = (other.ClosestPointOnBounds (this.transform.position));// - this.transform.position);
-			
-			//foreach (ParticleSystem particle in particles){
-				//particle.transform.position = otherDistance;
-				//particle.Play();
-			//}
+			partPos = (other.ClosestPointOnBounds (this.transform.position));
+			Debug.Log ("saw "+other.name);
 		}
 	}
 }

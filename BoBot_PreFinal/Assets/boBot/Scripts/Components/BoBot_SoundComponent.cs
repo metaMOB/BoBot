@@ -60,15 +60,22 @@ public class BoBot_SoundComponent : MonoBehaviour {
 		audioSourceHorizontalMoveEnd.clip = horizontalMoveEndSound;
 		audioSourceHorizontalMoveBegin.clip = horizontalMoveBeginSound;
 		
-		audioSourceHorizontalMoveLoop.playOnAwake = true;
+		
+		
+		audioSourceHorizontalMoveLoop.playOnAwake = false;
 		audioSourceHorizontalMoveEnd.playOnAwake = false;
 		audioSourceHorizontalMoveBegin.playOnAwake = false;
 		
-			
+		audioSourceHorizontalMoveLoop.minDistance = 0.1f;
+		audioSourceHorizontalMoveEnd.minDistance = 0.1f;
+		audioSourceHorizontalMoveBegin.minDistance = 0.1f;
+		
 		audioSourceHorizontalHit.clip = horizontalHitSound;
 		audioSourceVerticalHit.clip = verticalHitSound;
 		audioSourceHorizontalHit.playOnAwake = false;
 		audioSourceVerticalHit.playOnAwake = false;
+		audioSourceHorizontalHit.minDistance = 0.1f;
+		audioSourceVerticalHit.minDistance = 0.1f;
 		
 		
 		audioSourceVerticalHit.volume = volume;
@@ -93,7 +100,7 @@ public class BoBot_SoundComponent : MonoBehaviour {
 		//Debug.Log (basicPhysics);
 		if (!horizontalMoveBeginSound || !horizontalMoveEndSound){
 			audioSourceHorizontalMoveLoop.loop = true;
-			audioSourceHorizontalMoveLoop.Play();
+			//audioSourceHorizontalMoveLoop.Play();
 		}
 	}
 	
@@ -131,6 +138,9 @@ public class BoBot_SoundComponent : MonoBehaviour {
 				if (horizontalMoveBeginSound && horizontalMoveEndSound){
 					audioSourceHorizontalMoveBegin.Play();
 					audioSourceHorizontalMoveLoop.PlayDelayed(horizontalMoveBeginSound.length);
+				} else {
+					audioSourceHorizontalMoveLoop.loop = true;
+					audioSourceHorizontalMoveLoop.Play();
 				}
 			}
 		} else if (absDeltaX < horizontalMovingGate){
@@ -139,6 +149,8 @@ public class BoBot_SoundComponent : MonoBehaviour {
 				if (horizontalMoveBeginSound && horizontalMoveEndSound){
 					audioSourceHorizontalMoveLoop.Stop ();
 					audioSourceHorizontalMoveEnd.Play();
+				} else {
+					audioSourceHorizontalMoveLoop.loop = false;
 				}
 			} 			
 		}

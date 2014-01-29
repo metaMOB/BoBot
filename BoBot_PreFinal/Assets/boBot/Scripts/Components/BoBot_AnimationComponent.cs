@@ -45,11 +45,13 @@ public class BoBot_AnimationComponent : BoBot_OnOffComponent {
 	private float timerEnd = 0f;
 	private float active = 1;
 	
+	private float currentVel;
+	private int target;
 		
 	public void Start(){
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
 		rigidToAniamte = this.GetComponent<Rigidbody>();
-		
+		target = waypoints.Count -1;
 		/*if (firstAnimationWaypoint != null){
 			waypoints.Add(firstAnimationWaypoint);
 			while (waypoints[waypoints.Count-1].nextWaypoint != null && !waypoints.Contains(waypoints[waypoints.Count-1].nextWaypoint)){
@@ -109,17 +111,9 @@ public class BoBot_AnimationComponent : BoBot_OnOffComponent {
 							timerEnd = 0f;
 							active = 1f;
 						}
-					}
-					
+					}					
 				} else {
 					direction = val;
-					Debug.Log ("delta "+this.valDelta+" val "+val);
-					
-					/*if ( Mathf.Abs(val) < gateLower){
-						setAudio (soundHalt, false);
-					} else {
-						setAudio (soundMoving, true);
-					}*/
 				}
 					
 				if (actualElement < 0 || actualElement > waypoints.Count -1){

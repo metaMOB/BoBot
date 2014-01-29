@@ -9,7 +9,7 @@ public class BoBot_GearComponent : BoBot_OnOffComponent {
 	public GameObject connectedGear;
 	public AudioClip audioRunning;
 	public AudioClip audioStop;
-	public float volume = 10f;
+	public float gearVolume = 10f;
 	
 	private bool done = false;
 	private Vector3 rotationSpeedVector;
@@ -25,10 +25,11 @@ public class BoBot_GearComponent : BoBot_OnOffComponent {
 		connectedRotation = Vector3.zero;
 		gearSoundRun = gameObject.AddComponent<AudioSource>();
 		gearSoundRun.clip = audioRunning;
-		
+		gearSoundRun.minDistance = 0.1f;
+			
 		gearSoundStop = gameObject.AddComponent<AudioSource>();
 		gearSoundStop.clip = audioStop;
-		
+		gearSoundStop.minDistance = 0.1f;
 		
 		if (connectedGear){
 			connGear = connectedGear.GetComponent<BoBot_GearComponent>();
@@ -44,7 +45,7 @@ public class BoBot_GearComponent : BoBot_OnOffComponent {
 				gearSoundStop.Play();	
 			}
 			
-			gearSoundStop.volume = (val-gateUpper/2) * 10 * volume * 3;
+			gearSoundStop.volume = (val-gateUpper/2) * 10 * gearVolume * 3;
 		} else {
 			if (gearSoundStop.isPlaying){	
 				gearSoundStop.Stop();
@@ -59,7 +60,7 @@ public class BoBot_GearComponent : BoBot_OnOffComponent {
 			if (!done){
 				if (!gearSoundRun.isPlaying){
 					gearSoundRun.loop = true;
-					gearSoundRun.volume = volume;
+					gearSoundRun.volume = gearVolume;
 					gearSoundRun.Play();
 				}
 				

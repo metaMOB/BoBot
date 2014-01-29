@@ -11,11 +11,14 @@ public class BoBot_Rain : MonoBehaviour {
 	public float maxVolume = 0.5f;
 	public float maxParticles = 500f;
 	
+	public float grassSpeed = 1;
+	
 	private float actIntensity;
 	private ParticleSystem rain;
 	private float intensityDelta = 0.5f;
 	
 	private float deltaTime;
+	private e2dTerrain terrain;
 	
 	void Start () {
 		snd = gameObject.AddComponent<AudioSource>();
@@ -30,6 +33,7 @@ public class BoBot_Rain : MonoBehaviour {
 		
 		snd.volume = intensityDelta * maxVolume;
 		rain.emissionRate = intensityDelta * maxParticles;
+		terrain = GameObject.Find("Level").GetComponent<e2dTerrain>();
 	}
 	
 	// Update is called once per frame

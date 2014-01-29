@@ -69,7 +69,7 @@ public class BoBot_Switch : MonoBehaviour {
 		float newAngle = anglePerSec * Time.deltaTime * direction;
 		float possibleAngle = angle + newAngle;
 			
-		Vector3 old = this.gameObject.transform.FindChild("Hebel").transform.position;
+		Vector3 old = this.gameObject.transform.FindChild("Hebel").transform.FindChild("Griff").transform.position;
 		
 		if (functionality == mode.analog || direction < 0){
 			if (control.Length > 0){
@@ -87,11 +87,11 @@ public class BoBot_Switch : MonoBehaviour {
 	//		Debug.Log (" " + this.gameObject.transform.FindChild("Hebel").collider.transform.localPosition.x+ "  " );
 			
 		}
-		return this.gameObject.transform.FindChild("Hebel").transform.position - old;
+		return this.gameObject.transform.FindChild("Hebel").transform.FindChild("Griff").transform.position - old;
 	}
 	
 	public Vector3 getPos(){
-		return this.gameObject.transform.FindChild("Hebel").transform.position;
+		return this.gameObject.transform.FindChild("Hebel").transform.FindChild("Griff").transform.position;
 	}
 	
 	// Update is called once per frame

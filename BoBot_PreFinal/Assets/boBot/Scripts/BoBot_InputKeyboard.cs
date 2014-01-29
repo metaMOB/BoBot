@@ -6,6 +6,7 @@ public class BoBot_InputKeyboard : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		BoBotGlobal.input_horizontalDirection = 0f;
+		this.enabled = Application.platform  != RuntimePlatform.IPhonePlayer && Application.platform  != RuntimePlatform.Android;
 	}
 	
 	// Update is called once per frame

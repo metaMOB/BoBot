@@ -25,7 +25,7 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		this.reactOnTag = "canControl";
 		// Left 0.2 / -0.1
 		// Right 
-		this.distance = new Rect(0.1f, -0.2f, 0.2f, 0.4f);
+		this.distance = new Rect(-0.5f, -0.2f, 1f, 0.4f);
 		this.sensorValue = "control";
 		this.sensorValueGroup = "control";
 		hand = GameObject.Find("hand_r").GetComponent<Transform>();
@@ -68,7 +68,7 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		base.bind();
 		distanceToBobot = BoBotGlobal.character.transform.position - this.otherToUse.gameObject.transform.position;
 		float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
-		deltaPos = (-(x - hand.position.x)/2) / timeTillPos;
+		deltaPos = (-(x - hand.position.x)) / timeTillPos;
 		
 		/*Debug.Log ("hand "+ (x - hand.position.x));
 		newPos = Vector3.zero;

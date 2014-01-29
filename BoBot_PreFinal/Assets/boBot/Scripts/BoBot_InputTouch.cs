@@ -20,8 +20,8 @@ public class BoBot_InputTouch : MonoBehaviour {
 	Vector3 movement;
 	
 	// Use this for initialization
-	void Start () {
-		
+	void Start () {		
+		this.enabled = Application.platform  == RuntimePlatform.IPhonePlayer || Application.platform  == RuntimePlatform.Android;
 	}
 	
 	public void Update() {	

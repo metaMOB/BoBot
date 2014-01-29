@@ -942,6 +942,8 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				mesh.enabled = false;	
 			}
 		}
+		
+		BoBotGlobal.physics_isGravity = true;		
 	}
 		
 	void OnEndGame()

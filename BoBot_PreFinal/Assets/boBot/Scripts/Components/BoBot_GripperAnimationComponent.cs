@@ -52,7 +52,7 @@ public class BoBot_GripperAnimationComponent : BoBot_OnOffComponent {
 			debugInfo.addText ("> Direction "+directionGrap);
 		}
 		
-		if (angle > 5){
+		if (grapping && angle > 5){
 			grapping = false;
 			objectToGrap.useGravity = true;
 			objectToGrap.isKinematic = false;

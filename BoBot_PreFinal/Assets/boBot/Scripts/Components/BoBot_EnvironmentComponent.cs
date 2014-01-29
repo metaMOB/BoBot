@@ -6,7 +6,6 @@ public class BoBot_EnvironmentComponent : MonoBehaviour {
 	
 	GameObject [] riddleObjs;
 	
-	// Use this for initialization
 	void Start () {
 		riddleObjs = GameObject.FindGameObjectsWithTag("riddle");
 		foreach (GameObject riddleObj in riddleObjs){
@@ -19,10 +18,8 @@ public class BoBot_EnvironmentComponent : MonoBehaviour {
 	}
 	
 	public void setActiveRiddle(int nr){
-		//Debug.Log ("new "+nr);
 		foreach (GameObject riddleObj in riddleObjs){
 			BoBot_RiddleComponent riddle = riddleObj.GetComponent<BoBot_RiddleComponent>();
-		//	Debug.Log ("!!!new "+nr+"  "+riddle.riddleNr);
 			if (riddle.riddleNr == nr || riddle.riddleNr == nr+1 || riddle.riddleNr == nr-1){
 				riddleObj.SetActive(true);
 				Rigidbody [] rigids = riddleObj.GetComponentsInChildren<Rigidbody>();
@@ -36,7 +33,6 @@ public class BoBot_EnvironmentComponent : MonoBehaviour {
 					rigid.Sleep();
 				}			
 			}
-		}
-		
+		}		
 	}	
 }
