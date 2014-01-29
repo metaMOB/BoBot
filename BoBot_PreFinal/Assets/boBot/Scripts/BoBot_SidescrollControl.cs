@@ -763,7 +763,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 						BoBotGlobal.animator.SetBool("pull", false);
 						BoBotGlobal.animator.SetBool("canCarry", false);
 						BoBotGlobal.animator.SetBool("walk", true);
-						BoBotGlobal.collider_mainCollider.release(sensor);
+						BoBotGlobal.collider_mainCollider.release("carry");
 						return BoBotGlobal.state_walk;
 					}
 				} else {
