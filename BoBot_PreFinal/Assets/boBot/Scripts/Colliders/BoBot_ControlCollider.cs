@@ -60,9 +60,9 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 			
 			newPos = Vector3.zero;
 			
-			//float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().moveSwitch(-BoBotGlobal.input_horizontalDirection).x;
-			float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
-			newPos.x =  ((x - hand.position.x) - 0.7f * dir) ;
+			float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().moveSwitch(-BoBotGlobal.input_horizontalDirection).x;
+			//float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
+			//newPos.x =  ((x - hand.position.x) - 0.7f * dir) ;
 			BoBotGlobal.character.Move (newPos * 1.5f);
 		}
 	}
