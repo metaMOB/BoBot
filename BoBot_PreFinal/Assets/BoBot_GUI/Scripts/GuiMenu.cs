@@ -65,9 +65,11 @@ public class GuiMenu : MonoBehaviour {
 				GUILayout.Label("Menü");	
 			
 					if(GUILayout.Button("Spiel neu starten")){
-						if(Save_Load.ar_Player.Count>0){
+						/*if(Save_Load.ar_Player.Count>0){
 							Save_Load.Gamesave_Player_loeschen(Save_Load.ar_Player[3].ToString());
+							
 						}//if
+						static_holder.file_to_load = Save_Load.ar_Player[3].ToString();*/
 						sceneFader.SwitchScene (Level);
 					}//if
 					

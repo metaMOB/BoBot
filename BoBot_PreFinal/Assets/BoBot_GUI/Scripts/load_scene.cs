@@ -33,14 +33,14 @@ public class load_scene : MonoBehaviour {
 		Read_Data(file_to_load);
 		
 		}
-		else{
+		/*else{
 			meinTimestamp = System.DateTime.Now.ToString();
 			meinLevel = Level;
 			file_to_load = "\\boBot\\Gamesave\\Game\\" + myName + System.DateTime.Now.Day.ToString() + System.DateTime.Now.Month.ToString() + System.DateTime.Now.Year.ToString() + System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() + System.DateTime.Now.Second.ToString() + ".sav";
 			Save_Load.Gamesave_Player_schreiben(myName,meinLevel,meinTimestamp,file_to_load,GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
 			
 			Read_Data(file_to_load);
-		}
+		}*/
 		
 	}
 	

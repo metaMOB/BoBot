@@ -16,7 +16,7 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 	private Transform hand;
 	
 	private float posTimer = 0f;
-	private float timeTillPos = 1f;
+	private float timeTillPos = 0.5f;
 	private float deltaPos;
 	
 		
@@ -25,9 +25,10 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		this.reactOnTag = "canControl";
 		// Left 0.2 / -0.1
 		// Right 
-		this.distance = new Rect(-0.5f, -0.2f, 1f, 0.4f);
+		this.distance = new Rect(0f, -0.2f, 0.5f, 0.4f);
 		this.sensorValue = "control";
 		this.sensorValueGroup = "control";
+		
 		hand = GameObject.Find("hand_r").GetComponent<Transform>();
 	}
 	
@@ -40,7 +41,7 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 	public void Update (){
 		if (isBound){ // && this.otherToUse.rigidbody){
 			if (posTimer < timeTillPos){
-				BoBotGlobal.character.Move (new Vector3(deltaPos, 0, 0) * Time.deltaTime * 1.5f);	
+				BoBotGlobal.character.Move (new Vector3(deltaPos, 0, 0) * Time.deltaTime);	
 				posTimer += Time.deltaTime;
 			}
 		}
@@ -65,12 +66,17 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 	}
 	
 	override public void bind(){
+		float dir = BoBotGlobal.animator.GetFloat("Direction");
+		dir = dir / Mathf.Abs(dir);
 		base.bind();
 		distanceToBobot = BoBotGlobal.character.transform.position - this.otherToUse.gameObject.transform.position;
 		float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
-		deltaPos = (-(x - hand.position.x)) / timeTillPos;
+		deltaPos = ((x - hand.position.x) - 0.7f * dir) / timeTillPos;
+		BoBotGlobal.physics_velocity = Vector3.zero;
+		//BoBotGlobal.character.Move (new Vector3(deltaPos, 0, 0)); // * Time.deltaTime);	
 		
-		/*Debug.Log ("hand "+ (x - hand.position.x));
+		Debug.Log ("hand "+ hand.position.x +"  "+x+ " d "+deltaPos);
+		/*
 		newPos = Vector3.zero;
 		newPos.x = -xx/2;
 		

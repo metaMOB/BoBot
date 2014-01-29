@@ -16,6 +16,7 @@ public class BoBot_SuccessTag : MonoBehaviour {
 	void OnTriggerEnter (){
 		//SAVE!!
 		try {
+			Debug.Log ("Success!!! "+static_holder.file_to_load);
 			BoBotGlobal.environment.setActiveRiddle (nextRiddle);
 			Save_Load.Write_Data_Player(fileToLoad, GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
 		}
