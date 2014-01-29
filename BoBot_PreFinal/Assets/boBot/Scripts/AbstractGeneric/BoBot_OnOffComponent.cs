@@ -37,8 +37,8 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 		changeSound = this.gameObject.AddComponent<AudioSource>();
 		loopSound.volume = volume;
 		changeSound.volume = volume;
-		loopSound.minDistance = 1f;
-		changeSound.minDistance = 1f;
+		loopSound.minDistance = 0.2f;
+		changeSound.minDistance = 0.2f;
 		
 		loopSound.playOnAwake = false;
 		changeSound.playOnAwake = false;

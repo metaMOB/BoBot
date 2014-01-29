@@ -68,16 +68,16 @@ public class BoBot_SoundComponent : MonoBehaviour {
 		audioSourceHorizontalMoveEnd.playOnAwake = false;
 		audioSourceHorizontalMoveBegin.playOnAwake = false;
 		
-		audioSourceHorizontalMoveLoop.minDistance = 0.1f;
-		audioSourceHorizontalMoveEnd.minDistance = 0.1f;
-		audioSourceHorizontalMoveBegin.minDistance = 0.1f;
+		audioSourceHorizontalMoveLoop.minDistance = 0.2f;
+		audioSourceHorizontalMoveEnd.minDistance = 0.2f;
+		audioSourceHorizontalMoveBegin.minDistance = 0.2f;
 		
 		audioSourceHorizontalHit.clip = horizontalHitSound;
 		audioSourceVerticalHit.clip = verticalHitSound;
 		audioSourceHorizontalHit.playOnAwake = false;
 		audioSourceVerticalHit.playOnAwake = false;
-		audioSourceHorizontalHit.minDistance = 0.1f;
-		audioSourceVerticalHit.minDistance = 0.1f;
+		audioSourceHorizontalHit.minDistance = 0.2f;
+		audioSourceVerticalHit.minDistance = 0.2f;
 		
 		
 		audioSourceVerticalHit.volume = mainVolume;
