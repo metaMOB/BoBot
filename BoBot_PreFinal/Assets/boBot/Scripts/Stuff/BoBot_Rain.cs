@@ -42,7 +42,7 @@ public class BoBot_Rain : MonoBehaviour {
 		rain.emissionRate = intensityDelta * maxParticles;
 	
 		
-		if ( Mathf.Abs(intensityDelta) < 0.01){
+		/*if ( Mathf.Abs(intensityDelta) < 0.01){
 			if (snd.isPlaying){
 				snd.Stop();
 			}
@@ -58,7 +58,7 @@ public class BoBot_Rain : MonoBehaviour {
 			if (!rain.isPlaying){
 				rain.Play();	
 			}
-		}
+		}*/
 	}
 	
 	public void setIntensity (float newIntensity, float newDeltaTime){

@@ -49,6 +49,7 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		
 	public override void moveHorizontal (float push){
 		if (isBound){
+			float dir = BoBotGlobal.animator.GetFloat("Direction");
 			if (push == 1f){
 				BoBotGlobal.animator.SetBool("push", true);
 				BoBotGlobal.animator.SetBool("pull", false);
@@ -59,8 +60,9 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 			
 			newPos = Vector3.zero;
 			
-			float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().moveSwitch(-BoBotGlobal.input_horizontalDirection).x;
-			newPos.x = x;
+			//float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().moveSwitch(-BoBotGlobal.input_horizontalDirection).x;
+			float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
+			newPos.x =  ((x - hand.position.x) - 0.7f * dir) ;
 			BoBotGlobal.character.Move (newPos * 1.5f);
 		}
 	}
