@@ -43,9 +43,9 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 			sndB.volume = volume * fadeVolume * volB;
 			sndA.volume = volume * (1f-fadeVolume) * volA;
 		} else {
-			if (sndA.isPlaying && sndA.volume < 0.1f){
+			if (sndA.isPlaying && sndA.volume < 0.01f){
 				sndA.Stop();	
-			} else if (sndB.isPlaying && sndB.volume < 0.1f){
+			} else if (sndB.isPlaying && sndB.volume < 0.01f){
 				sndB.Stop();	
 			}
 		}
