@@ -53,6 +53,7 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 	}
 	
 	public void setNewSound (AudioClip newSound, float timeToFade, float vol){
+		this.timeFade = timeToFade;
 		if (fadeVolume < 0.1f ){
 			sndB.clip = newSound;
 			sndB.Play();
