@@ -39,13 +39,13 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 	void Update () {
 		fadeVolume = Mathf.SmoothDamp (fadeVolume, target, ref currentVelocity, timeFade);
 		
-		if ( Mathf.Abs(currentVelocity) > 0.01){
+		if ( Mathf.Abs(currentVelocity) > 0.001){
 			sndB.volume = volume * fadeVolume * volB;
 			sndA.volume = volume * (1f-fadeVolume) * volA;
 		} else {
-			if (sndA.isPlaying && sndA.volume < 0.01f){
+			if (sndA.isPlaying && sndA.volume < 0.001f){
 				sndA.Stop();	
-			} else if (sndB.isPlaying && sndB.volume < 0.01f){
+			} else if (sndB.isPlaying && sndB.volume < 0.001f){
 				sndB.Stop();	
 			}
 		}

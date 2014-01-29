@@ -33,8 +33,8 @@ public class GuiMenu : MonoBehaviour {
 		if(Screen.dpi >0){
 			dpi = Screen.dpi;
 		}
-		//skin.button.fontSize = (int)((dpi/160)*50);
-		skin.button.fontSize = 50;
+		skin.button.fontSize = (int)((dpi/160)*50);
+		
 		Vector2 scale = new Vector2((float)AspectUtility.screenWidth / WIDTH,(float)AspectUtility.screenHeight / HEIGHT);
 		GUI.matrix = Matrix4x4.TRS(new Vector3((float) AspectUtility.xOffset, (float) AspectUtility.yOffset, 0), Quaternion.identity, new Vector3(scale.x,scale.y,1.0f));
 		
