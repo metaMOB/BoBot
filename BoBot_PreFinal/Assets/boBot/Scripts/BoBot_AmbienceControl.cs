@@ -56,17 +56,18 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 		this.timeFade = timeToFade;
 		if (fadeVolume < 0.1f ){
 			try{
-			sndB.clip = newSound;
+				sndB.clip = newSound;
+				sndB.Play();
 			} catch{}
-			sndB.Play();
+			
 			volB = vol;
 			target = 1f;
 		} else if (fadeVolume > 0.9f ){
 			try{
 				sndA.clip = newSound;
+				sndA.Play();
 			} catch{}
-			
-			sndA.Play();
+					
 			volA = vol;
 			target = 0;
 		}
