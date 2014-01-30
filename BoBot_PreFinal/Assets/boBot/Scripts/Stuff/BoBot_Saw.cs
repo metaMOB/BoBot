@@ -20,7 +20,8 @@ public class BoBot_Saw : MonoBehaviour {
 		//Physics.IgnoreLayerCollision(0, 12);
 		snd = gameObject.AddComponent<AudioSource>();
 		snd.clip = sawingSound;
-		snd.minDistance = 0.4f;
+		snd.minDistance = 1f;
+		snd.maxDistance = 10f;
 		snd.volume = 0f;
 		snd.Play();
 		foreach (ParticleSystem particle in particles){
