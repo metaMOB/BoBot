@@ -21,7 +21,7 @@ public class BoBot_ActionColliderGeneric : MonoBehaviour {
 	private GameObject objectMain;
 	
 	protected bool tryToRelease;
-	protected bool isBound;
+	protected bool isBound = false;
 	protected Collider other;
 	protected Collider otherToUse;
 	
@@ -46,8 +46,8 @@ public class BoBot_ActionColliderGeneric : MonoBehaviour {
 			if (distance.Contains(distancePosititon)){ 		
 				
 				if (other.collider.CompareTag("canCarry")){
-			Debug.Log(distancePosititon);
-			Debug.Log ("edge "+ distanceRelative.x +" // "+distanceRelative.y);
+//			Debug.Log(distancePosititon);
+//			Debug.Log ("edge "+ distanceRelative.x +" // "+distanceRelative.y);
 		}
 				
 				isActive = true;

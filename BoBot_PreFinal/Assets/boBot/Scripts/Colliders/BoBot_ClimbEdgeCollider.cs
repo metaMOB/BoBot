@@ -47,10 +47,17 @@ public class BoBot_ClimbEdgeCollider : BoBot_ActionColliderGeneric {
 	public override void moveVertical (float amount){
 		if (isBound){
 			release();
-			BoBotGlobal.physics_velocity.y = BoBotGlobal.speed_jumpSpeedUp * 1.1f;
-			BoBotGlobal.physics_velocity.x = BoBotGlobal.speed_jumpSpeedForward * 0.15f * BoBotGlobal.animator.GetFloat("Direction");
+			if (amount > 0){
+				BoBotGlobal.physics_velocity.y = BoBotGlobal.speed_jumpSpeedUp * 1.1f;
+				BoBotGlobal.physics_velocity.x = BoBotGlobal.speed_jumpSpeedForward * 0.15f * BoBotGlobal.animator.GetFloat("Direction");
+			} else {
+				BoBotGlobal.physics_velocity = BoBotGlobal.character.velocity;
+				BoBotGlobal.physics_velocity.y = BoBotGlobal.speed_jumpSpeedUp/1.2f;
+				BoBotGlobal.physics_velocity.x = BoBotGlobal.speed_jumpSpeedForward/13 * -BoBotGlobal.animator.GetFloat("Direction");				
+				BoBotGlobal.animator.SetFloat("Direction", BoBotGlobal.input_horizontalDirectionShort);
+				BoBotGlobal.physics_isGravity = true;	
+			}
 			BoBotGlobal.animator.SetBool("canClimbEdge", false);
-			release();
 		}
 	}
 	
@@ -60,11 +67,14 @@ public class BoBot_ClimbEdgeCollider : BoBot_ActionColliderGeneric {
 			if ( (bodyDirection+BoBotGlobal.input_horizontalDirectionShort) == 0f){
 				BoBotGlobal.physics_velocity = BoBotGlobal.character.velocity;
 				BoBotGlobal.physics_velocity.y = BoBotGlobal.speed_jumpSpeedUp/1.2f;
-				BoBotGlobal.physics_velocity.x = BoBotGlobal.speed_jumpSpeedForward/13 * BoBotGlobal.input_horizontalDirectionShort;
-				BoBotGlobal.animator.SetBool("canClimbEdge", false);
+				BoBotGlobal.physics_velocity.x = BoBotGlobal.speed_jumpSpeedForward/13 * BoBotGlobal.input_horizontalDirectionShort;				
 				BoBotGlobal.animator.SetFloat("Direction", BoBotGlobal.input_horizontalDirectionShort);
 				BoBotGlobal.physics_isGravity = true;				
+			} else {
+				BoBotGlobal.physics_velocity.y = BoBotGlobal.speed_jumpSpeedUp * 1.1f;
+				BoBotGlobal.physics_velocity.x = BoBotGlobal.speed_jumpSpeedForward * 0.15f * BoBotGlobal.animator.GetFloat("Direction");
 			}
+			BoBotGlobal.animator.SetBool("canClimbEdge", false);
 		}
 	}
 		

@@ -14,6 +14,7 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 	private Quaternion rot;
 	
 	private Transform hand;
+	private Transform bobot;
 	
 	private float posTimer = 0f;
 	private float timeTillPos = 0.5f;
@@ -25,7 +26,7 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		this.reactOnTag = "canControl";
 		// Left 0.2 / -0.1
 		// Right 
-		this.distance = new Rect(0f, -0.2f, 0.75f, 0.4f);
+		this.distance = new Rect(0f, -0.2f, 0.35f, 0.4f);
 		this.sensorValue = "control";
 		this.sensorValueGroup = "control";
 		
@@ -75,11 +76,11 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		base.bind();
 		distanceToBobot = BoBotGlobal.character.transform.position - this.otherToUse.gameObject.transform.position;
 		float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
-		deltaPos = ((x - hand.position.x) - 0.7f * dir) / timeTillPos;
+		deltaPos = ((x - (BoBotGlobal.character.transform.position.x + hand.position.x))) / timeTillPos;
 		BoBotGlobal.physics_velocity = Vector3.zero;
 		//BoBotGlobal.character.Move (new Vector3(deltaPos, 0, 0)); // * Time.deltaTime);	
 		
-		Debug.Log ("hand "+ hand.position.x +"  "+x+ " d "+deltaPos);
+		Debug.Log ("hand "+ (BoBotGlobal.character.transform.position.x + hand.position.x) +"  "+x+ " d "+deltaPos);
 		/*
 		newPos = Vector3.zero;
 		newPos.x = -xx/2;

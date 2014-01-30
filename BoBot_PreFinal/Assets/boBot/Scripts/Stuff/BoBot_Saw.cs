@@ -60,7 +60,7 @@ public class BoBot_Saw : MonoBehaviour {
 	void OnTriggerStay(Collider other){
 		if (!other.name.Equals("_collider")){
 			partPos = (other.ClosestPointOnBounds (this.transform.position));
-			Debug.Log ("saw "+other.name);
+			//Debug.Log ("saw "+other.name);
 		}
 	}
 }

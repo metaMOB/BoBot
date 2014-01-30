@@ -16,7 +16,7 @@ public class BoBot_CarryCollider : BoBot_ActionColliderGeneric {
 			
 	void Awake () {		
 		this.reactOnTag = "canCarry";
-		this.distance = new Rect(0f, -0.45f, 0.2f, 0.75f);
+		this.distance = new Rect(0f, -0.45f, 0.6f, 0.75f);
 	//	this.distancePrepare = new Rect(0.15f, -0.45f, 0.6f, 0.75f);	
 		this.sensorValue = "carry";
 	//	this.prepareAnimationName = "canCarry";
