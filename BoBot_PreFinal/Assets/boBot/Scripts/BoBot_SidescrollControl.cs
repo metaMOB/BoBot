@@ -1034,7 +1034,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 					deathTimer = 0f;
 					sceneFader.SwitchScene (Save_Load.ar_Player[1].ToString());
 				}
-				eye.GetComponent<Light>().intensity = eyeIntensity * (1- (deathTimer/BoBotGlobal.time_timeTillReload));
+				eye.GetComponent<Light>().intensity = eyeIntensity * (1- (deathTimer/(BoBotGlobal.time_timeTillReload)));
 			} else {
 				
 				if (BoBotGlobal.activePlatform != null) {

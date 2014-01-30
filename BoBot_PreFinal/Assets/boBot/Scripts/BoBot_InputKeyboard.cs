@@ -51,7 +51,7 @@ public class BoBot_InputKeyboard : MonoBehaviour {
 			BoBotGlobal.input_verticalDirection = 0f;
 		}
 		
-		if (Input.GetKey (KeyCode.LeftShift) )
+		if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift))
 		{	
 			BoBotGlobal.input_action = Mathf.Min ( 1f, Mathf.Max ( 0f, BoBotGlobal.input_action+deltaTime));
 		} else {
