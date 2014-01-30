@@ -13,11 +13,6 @@ public class BoBot_ClimbEdgeCollider : BoBot_ActionColliderGeneric {
 		this.reactOnTag = "canClimbEdge";
 		this.distance = new Rect(0.15f, 0.0f, 0.5f, 0.0001f);
 		this.distancePrepare = new Rect(-0.2f, -1.1f, 1.4f, 2.5f);		
-		//this.distancePrepare = new Rect(-1.4f, -1.1f, 2.8f, 2.5f);		
-		
-		//this.distance = new Rect(-0.55f, -0.1f, 1.1f, 0.05f);
-		//this.distancePrepare = new Rect(-2f, -0.1f, 4f, 1.5f);		
-		
 		
 		this.sensorValue = "climbEdge";
 		this.sensorValueGroup = "climb";
@@ -26,21 +21,19 @@ public class BoBot_ClimbEdgeCollider : BoBot_ActionColliderGeneric {
 	}
 	
 	void Update (){
-		//BoBotGlobal.animator.SetBool("hangle", false);
 		timerOff += Time.deltaTime;
 		
 		if (isBound){
-		Vector3 isPos = BoBotGlobal.collider_mainCollider.transform.position;
-		Vector3 targetPos = this.otherToUse.transform.position;
-			
-			if (isPos != targetPos){				
-				Vector3 newPos = Vector3.zero;
-				newPos.x = targetPos.x - isPos.x;
-				newPos.y = targetPos.y - isPos.y;
-				//Debug.Log (BoBotGlobal.collider_mainCollider.transform.position.y + "   "+this.otherToUse.transform.position.y+"  "+newPos.y);
-				BoBotGlobal.character.Move(newPos); 
-				//BoBotGlobal.physics_velocity.x += 1f;
-			}
+			Vector3 isPos = BoBotGlobal.collider_mainCollider.transform.position;
+			try {
+				Vector3 targetPos = this.otherToUse.transform.position;
+				if (isPos != targetPos){				
+					Vector3 newPos = Vector3.zero;
+					newPos.x = targetPos.x - isPos.x;
+					newPos.y = targetPos.y - isPos.y;
+					BoBotGlobal.character.Move(newPos); 
+				}
+			} catch { release(); }
 		}
 	}	
 	

@@ -17,7 +17,6 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 	private float timeFade = 1f;
 	private float target = 1;
 	
-	// Use this for initialization
 	void Start () {
 		sndA = gameObject.AddComponent<AudioSource>();
 		sndB = gameObject.AddComponent<AudioSource>();
@@ -35,21 +34,10 @@ public class BoBot_AmbienceControl : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		fadeVolume = Mathf.SmoothDamp (fadeVolume, target, ref currentVelocity, timeFade);
-		
-		//if ( Mathf.Abs(currentVelocity) > 0.001){
-			sndB.volume = volume * fadeVolume * volB;
-			sndA.volume = volume * (1f-fadeVolume) * volA;
-		/*} else {
-			if (sndA.isPlaying && sndA.volume < 0.001f){
-				sndA.Stop();	
-			} else if (sndB.isPlaying && sndB.volume < 0.001f){
-				sndB.Stop();	
-			}
-		}*/
-		
+		sndB.volume = volume * fadeVolume * volB;
+		sndA.volume = volume * (1f-fadeVolume) * volA;
 	}
 	
 	public void setNewSound (AudioClip newSound, float timeToFade, float vol){

@@ -17,15 +17,12 @@ public class BoBot_RiddleComponent : BoBot_OnOffComponent {
 	private BoBot_DebugComponent debugInfo;
 	private bool done = false;
 	
-	// Use this for initialization
 	void Start () {
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
 		emitters = gameObject.GetComponentsInChildren<ParticleSystem>();
 		cameraComponent = GameObject.Find("Main Camera").GetComponent<BoBot_SmoothFollow2D>();
-		//gameObject.SetActive(false);
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (BoBotGlobal.debugging && debugInfo){
 			debugInfo.addText ("RiddleComponent");

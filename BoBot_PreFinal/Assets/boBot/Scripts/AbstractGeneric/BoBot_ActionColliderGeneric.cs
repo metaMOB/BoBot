@@ -6,7 +6,6 @@ using System;
 
 public class BoBot_ActionColliderGeneric : MonoBehaviour {	
 	
-	// Initialisierung notwendig!
 	public virtual string sensorValue {get; set;}
 	public virtual string sensorValueGroup {get; set;}
 	
@@ -39,16 +38,12 @@ public class BoBot_ActionColliderGeneric : MonoBehaviour {
 	public virtual void check(Vector2 distancePosititon, Collider other, Vector2 distanceRelative){			
 		
 		this.distanceRelative = distanceRelative;
-//		Debug.Log (otherMainObject.name+ "  "+other.tag);
-//		objectMain = otherMainObject;	
-		if ( other.collider.CompareTag(this.reactOnTag) ){	
-			
-			if (distance.Contains(distancePosititon)){ 		
-				
-				if (other.collider.CompareTag("canCarry")){
-//			Debug.Log(distancePosititon);
-//			Debug.Log ("edge "+ distanceRelative.x +" // "+distanceRelative.y);
-		}
+		if ( other.collider.CompareTag(this.reactOnTag) ){				
+			if (distance.Contains(distancePosititon)){ 						
+				/*if (other.collider.CompareTag("canCarry")){
+//					Debug.Log(distancePosititon);
+//					Debug.Log ("edge "+ distanceRelative.x +" // "+distanceRelative.y);
+				}*/
 				
 				isActive = true;
 				this.other = other;
@@ -57,39 +52,22 @@ public class BoBot_ActionColliderGeneric : MonoBehaviour {
 				if (this.distancePrepare.Contains(distanceRelative)){
 					perpareFound++;
 				}
-				BoBotGlobal.animator.SetBool(this.prepareAnimationName , perpareFound > 0);	
-				
-			}
-			
-			
+				BoBotGlobal.animator.SetBool(this.prepareAnimationName , perpareFound > 0);					
+			}			
 		}		
 	}	
 	
-	void Update(){
-			
+	void Update(){			
 	}
 		
 	public virtual void updateState(){
 		this.isUseable = this.isActive && !this.tryToRelease;		
-		
-		if (tryToRelease){
-			
+		if (tryToRelease){			
 			if ( Time.fixedTime - begin > 0.1f){
 				tryToRelease = false;
 			}
 		}	
-		/*if (!this.isActive){
-			tryToRelease = false;
-		}*/
-		
-	/*	if (tryToRelease){
-			timer += Time.deltaTime;
-			Debug.Log ("timer "+ timer);
-			if ( timer > 0.5f){
-				timer = 0f;
-				tryToRelease = false;
-			}
-		}		*/
+	
 		this.isActive = false;
 		this.perpareFound = 0;
 	}

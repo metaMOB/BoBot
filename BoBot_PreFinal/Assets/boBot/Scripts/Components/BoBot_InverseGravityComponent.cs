@@ -3,7 +3,6 @@ using System.Collections;
 
 public class BoBot_InverseGravityComponent : BoBot_OnOffComponent {
 
-	// Use this for initialization
  	private Rigidbody rigid;
 	private Vector3 gravity;
 	public bool inverse;
@@ -19,7 +18,6 @@ public class BoBot_InverseGravityComponent : BoBot_OnOffComponent {
 		isRunning = inverse;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	 	if (state && !rigid.isKinematic){
 			rigid.AddForce (-gravity*rigid.mass*factor);

@@ -27,7 +27,6 @@ public class BoBot_EnvironmentTag : MonoBehaviour {
 	
 	private BoBot_DebugComponent debugInfo;	
 	
-	// Use this for initialization
 	void Start () {
 		controller = GameObject.Find("LightningControl").GetComponent<BoBot_LightningControl>();
 		rain = GameObject.Find("Rain").GetComponent<BoBot_Rain>();
@@ -45,19 +44,16 @@ public class BoBot_EnvironmentTag : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter (Collider other){
-		//Debug.Log ("name "+other.tag);
 		if (other.CompareTag("Player")){
-			//timeBeetweenOld = controller.timeBetween;
-			//varianzOld = controller.varianz;
 			controller.setLightning(timeBeetween, varianz, noSound, minFlashes, maxFlashes, growlVolume, thunderVolume);
 			rain.setIntensity(rainIntensity, rainDeltaTime); 
 			ambienceController.setNewSound (nextAmbientSound, fadeTime, nextAmbientSoundVolume);
 		}
 	}
 	
-	void OnTriggerExit (Collider other){
-		/*if (other.CompareTag("Player")){
+	/*void OnTriggerExit (Collider other){
+		if (other.CompareTag("Player")){
 			controller.setLightning(timeBeetween, varianz, noSound, minFlashes, maxFlashes);
-		}*/
-	}
+		}
+	}*/
 }

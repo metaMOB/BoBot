@@ -11,23 +11,17 @@ public class BoBot_ClimbRopeCollider : BoBot_ActionColliderGeneric {
 	private int actualElement = 0;
 	private int nextElement = 0;
 	
-	
-	//private Vector3 lastPos;
-	
-	
 	void Awake () {		
 		this.reactOnTag = "canClimbRope";
 		this.distance = new Rect(-0.15f, -0.15f, 0.3f, 0.3f);
 		this.distancePrepare = new Rect(0.15f, -1f, 5.0f, 2.5f);	
 		this.prepareAnimationName = "canClimb";
 		this.sensorValue = "climbRope";
-		this.sensorValueGroup = "climb";
-		
+		this.sensorValueGroup = "climb";		
 	}
 	
-	void Update () { // FixedUpdate		
+	void Update () { 
 		if (isBound){			
-			//lastPos = BoBotGlobal.character.transform.position;
 			Vector3 targetPos = Vector3.Lerp (chain[actualElement].transform.position, chain[nextElement].transform.position, actualChainElement%1.0f) - transform.position; 
 			targetPos.z = 0;
 			BoBotGlobal.character.Move (targetPos);
@@ -38,14 +32,6 @@ public class BoBot_ClimbRopeCollider : BoBot_ActionColliderGeneric {
 			newRot.z = Quaternion.LookRotation(targetRot).z;
 			BoBotGlobal.character.transform.rotation = newRot;
 		}		
-		
-//		if (tryToRelease){
-//			timer += Time.deltaTime;
-//			if ( timer > 1f){
-//				timer = 0f;
-//				tryToRelease = false;
-//			}
-//		}
 	}	
 	
 	public override void moveVertical (float amount){
@@ -77,7 +63,7 @@ public class BoBot_ClimbRopeCollider : BoBot_ActionColliderGeneric {
 		{			
 			Transform otherParent = this.otherToUse.transform.parent;
 			BoBot_Chain_Element[] others = otherParent.transform.GetComponentsInChildren<BoBot_Chain_Element>();
-			BoBot_Chain_Element lastEntry = others.Last(); // = new boBot_Chain_Element();
+			BoBot_Chain_Element lastEntry = others.Last(); 
 			
 			foreach (BoBot_Chain_Element entry in others){
 				if (entry.openEnd){
@@ -90,8 +76,7 @@ public class BoBot_ClimbRopeCollider : BoBot_ActionColliderGeneric {
 			while (lastEntry.GetComponent<CharacterJoint>() && lastEntry.GetComponent<CharacterJoint>().connectedBody){
 				chain.Add (lastEntry.GetComponent<CharacterJoint>().connectedBody.transform.GetComponent<BoBot_Chain_Element>());				
 				lastEntry = lastEntry.GetComponent<CharacterJoint>().connectedBody.transform.GetComponent<BoBot_Chain_Element>();
-			}
-			
+			}			
 			
 			actualChainElement = chain.IndexOf(this.otherToUse.transform.GetComponent<BoBot_Chain_Element>());
 			actualElement = Mathf.FloorToInt(Mathf.Min (chain.Count-1.0f, Mathf.Max (0.0f, actualChainElement)));
@@ -102,37 +87,4 @@ public class BoBot_ClimbRopeCollider : BoBot_ActionColliderGeneric {
 			isVerticalOrientation = !isHorizontalOrientation;	
 		} 
 	}	
-		
-	/*override public void action (ref Collider other){
-		if (chain.Count == 0)
-		{			
-			modeRope = true;
-			Transform otherParent = other.transform.parent;
-			boBot_Chain_Element[] others = otherParent.transform.GetComponentsInChildren<boBot_Chain_Element>();
-			boBot_Chain_Element lastEntry = others.Last(); 
-			
-			foreach (boBot_Chain_Element entry in others){
-				if (entry.openEnd){
-					chain.Add (entry);
-					lastEntry = entry;
-					break;
-				}
-			}
-			
-			while (lastEntry.GetComponent<CharacterJoint>().connectedBody){
-				chain.Add (lastEntry.GetComponent<CharacterJoint>().connectedBody.transform.GetComponent<boBot_Chain_Element>());				
-				lastEntry = lastEntry.GetComponent<CharacterJoint>().connectedBody.transform.GetComponent<boBot_Chain_Element>();
-			}
-			
-			
-			actualChainElement = chain.IndexOf(other.transform.GetComponent<boBot_Chain_Element>());
-			actualElement = Mathf.FloorToInt(Mathf.Min (chain.Count-1.0f, Mathf.Max (0.0f, actualChainElement)));
-			nextElement = Mathf.Min (actualElement+1, chain.Count-1);
-						
-			Vector3 distance = (chain.First().transform.position - chain.Last().transform.position).normalized;
-			
-			isHorizontalOrientation = (distance.x > distance.y);
-			isVerticalOrientation = !isHorizontalOrientation;		
-		}
-	}*/
 }

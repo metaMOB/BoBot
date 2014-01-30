@@ -47,21 +47,17 @@ public class BoBot_EnvironmentComponent : MonoBehaviour {
 		}
 	}
 	
-	public void setActiveRiddle(int nr){
-		
+	public void setActiveRiddle(int nr){	
+		BoBotGlobal.levelCheat = nr;
 		audioSrcs = new List<AudioSource>();
 		foreach (GameObject riddleObj in riddleObjs){
 			BoBot_RiddleComponent riddle = riddleObj.GetComponent<BoBot_RiddleComponent>();
 			if (riddle.riddleNr != nr){
 				foreach (AudioSource scr in riddle.gameObject.GetComponentsInChildren<AudioSource>()){
-					//scr.minDistance = 0.1f;
-					//scr.maxDistance = 1f;
 					audioSrcs.Add(scr);
 				} 
 			} else {
 				foreach (AudioSource scr in riddle.gameObject.GetComponentsInChildren<AudioSource>()){
-					//scr.minDistance = 0.1f;
-					//scr.maxDistance = 1f;
 					scr.minDistance = 1f;
 					scr.maxDistance = 10f;
 					scr.mute = false;
@@ -80,8 +76,9 @@ public class BoBot_EnvironmentComponent : MonoBehaviour {
 				foreach (Rigidbody rigid in rigids){
 					rigid.Sleep();
 				}			
-			}
+			}			
 		}
+		
 		if (audioSrcs.Count > 0){
 			timer = 2.5f;
 			intensity = 1f;

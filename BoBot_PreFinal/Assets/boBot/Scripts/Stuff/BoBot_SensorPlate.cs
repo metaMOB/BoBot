@@ -19,7 +19,6 @@ public class BoBot_SensorPlate : MonoBehaviour {
 	private float timerOff = 0f;
 	private bool running = false;
 	
-	// Use this for initialization
 	void Start () {
 		foreach (GameObject obj in control){
 			BoBot_ControlComponent [] cmps = obj.GetComponents<BoBot_ControlComponent>();
@@ -38,7 +37,6 @@ public class BoBot_SensorPlate : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (running){
 			if (numElements > 0){
@@ -49,8 +47,7 @@ public class BoBot_SensorPlate : MonoBehaviour {
 						controller.setValue (1, channel);
 					}
 				}
-			} else {
-				
+			} else {				
 				if (timer < delayOn+delayOff){
 					timer += Time.deltaTime;
 				} else {
@@ -60,8 +57,7 @@ public class BoBot_SensorPlate : MonoBehaviour {
 					timer = 0f;	
 					running = false;
 				}
-			}
-			
+			}			
 			numElements = 0;
 		}
 	}

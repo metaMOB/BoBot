@@ -13,12 +13,11 @@ public class BoBot_HitCounterComponent : MonoBehaviour {
 	private bool done = false;
 	private Transform thisTransform;
 	private bool busy = false;
-	// Use this for initialization
+	
 	void Start () {
 		thisTransform = transform;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (!done && hits >= hitsTillAction){
 			done = true;

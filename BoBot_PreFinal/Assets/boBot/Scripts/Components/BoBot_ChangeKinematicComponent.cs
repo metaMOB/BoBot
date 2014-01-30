@@ -8,17 +8,13 @@ public class BoBot_ChangeKinematicComponent: BoBot_OnOffComponent {
 	private float timer = 0;
 	private bool run = false;
 
-	// Use this for initialization
 	void Start () {
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
 		if (this.rigidbody != null){
 			this.rigidbody.isKinematic = true;
-		}
-		
-		
+		}		
 	}
 	
-	// Update is called once per frame
 	void Update () {		
 		if (this.state){
 			timer += Time.deltaTime;

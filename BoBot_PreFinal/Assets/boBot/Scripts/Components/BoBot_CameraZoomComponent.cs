@@ -9,18 +9,14 @@ public class BoBot_CameraZoomComponent : MonoBehaviour {
 	private Camera thisCamera;
 	private float originalZoomLevel;
 	private float newZoomLevel;
-	private bool isRunning = false;
-	
+	private bool isRunning = false;	
 	private BoBot_DebugComponent debugInfo;
 
-	
-	// Use this for initialization
 	void Start () {
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
 		thisCamera = this.GetComponent<Camera>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (BoBotGlobal.debugging && debugInfo){
 			debugInfo.addText ("CameraZoomComponent");

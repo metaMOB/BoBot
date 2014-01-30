@@ -16,8 +16,5 @@ public class BoBot_ControlComponent : MonoBehaviour {
 	public int channel = 1;
 	
 	public virtual void setValue(float value, int channel){
-		//Debug.Log ("or "+val);
-		//this.val = value;
-		//this.isRunning = value != 0f;
 	}	
 }

@@ -12,13 +12,11 @@ public class BoBot_ParticleComponent : BoBot_OnOffComponent {
 	
 	private float maxEmits;
 	
-	// Use this for initialization
 	void Start () {
 		part = this.gameObject.GetComponent<ParticleSystem>();
 		maxEmits = part.emissionRate;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (state){
 			target = 1;

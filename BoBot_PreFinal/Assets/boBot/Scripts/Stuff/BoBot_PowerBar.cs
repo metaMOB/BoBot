@@ -18,7 +18,7 @@ public class BoBot_PowerBar : MonoBehaviour {
 	private Collider collider;
 	private AudioSource snd;
 	private Color clr;
-	// Use this for initialization
+	
 	void Start () {
 		timer = 0f;
 		collider = gameObject.GetComponentInChildren<Collider>();
@@ -29,7 +29,6 @@ public class BoBot_PowerBar : MonoBehaviour {
 		snd.volume = volume;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (timer == 0){
 			nextTime = timeBetween + Random.value * ((timeBetween * varianz * 2)) - timeBetween * varianz;
@@ -50,28 +49,23 @@ public class BoBot_PowerBar : MonoBehaviour {
 			clr = new Color (1f,1f,1f, Random.value);
 			flickerObject.renderer.material.color = clr;
 			
-			
 			if (!running){
 				foreach (ParticleSystem emitter in emitters){
 					Vector3 pos = emitter.transform.position;
-					// this.renderer.bounds.size.x;
 					pos.x = collider.bounds.min.x + Random.value * collider.bounds.size.x;
 					emitter.transform.position = pos;
 					emitter.Play();
 					running = true;					
 				}
 			}
-			
-			
-			
+						
 			if (timer > nextTime+particleOnTime){
 				foreach (ParticleSystem emitter in emitters){
 					emitter.Stop();
 					emitter.transform.Rotate(new Vector3( 0f, 0f, Random.value * 100f -50f) );					
 				}
 				running = false;
-				timer = 0f;
-				
+				timer = 0f;				
 			}
 		} 
 	}

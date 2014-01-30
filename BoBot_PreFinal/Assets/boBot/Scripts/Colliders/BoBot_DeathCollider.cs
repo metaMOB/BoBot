@@ -19,10 +19,7 @@ public class BoBot_DeathCollider : BoBot_ActionColliderGeneric {
 		this.distance = new Rect(-0.5f, -0.6f, 1f, 0.7f);
 		this.sensorValue = "lethal";
 		this.sensorValueGroup = "lethal";
-		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
-		//this.distancePrepare = new Rect(0f, -0.1f, 1.6f, 1.5f);		
-		//this.prepareAnimationName = "die";
-	
+		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();	
 	}
 	
 	public void Update(){
