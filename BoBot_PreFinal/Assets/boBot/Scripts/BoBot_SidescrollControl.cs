@@ -182,6 +182,8 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 	private SceneFader sceneFader;
 	
 	private float deathTimer = 0; 
+	private float eyeIntensity;
+	private GameObject eye; 
 	
 	public class Idle : BoBot_FSMState
 	{			
@@ -964,6 +966,8 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 		}
 		
 		BoBotGlobal.physics_isGravity = true;		
+		eye = GameObject.Find("SpotlightEye");
+		eyeIntensity = eye.GetComponent<Light>().intensity;
 		
 	}
 		
@@ -1023,6 +1027,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				BoBotGlobal.physics_isGravity = true;
 				BoBotGlobal.physics_velocity = Vector3.zero;
 				deathTimer += Time.deltaTime;
+			    eye.GetComponent<Light>().intensity = eyeIntensity * (1- (deathTimer/BoBotGlobal.time_timeTillReload));
 				if (deathTimer > BoBotGlobal.time_timeTillReload){
 					deathTimer = 0f;
 					sceneFader.SwitchScene (Save_Load.ar_Player[1].ToString());

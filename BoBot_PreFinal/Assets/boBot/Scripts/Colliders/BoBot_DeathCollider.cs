@@ -16,7 +16,7 @@ public class BoBot_DeathCollider : BoBot_ActionColliderGeneric {
 			
 	void Awake () {		
 		this.reactOnTag = "lethal";
-		this.distance = new Rect(-0.5f, -0.5f, 1f, 0.6f);
+		this.distance = new Rect(-0.5f, -0.6f, 1f, 0.7f);
 		this.sensorValue = "lethal";
 		this.sensorValueGroup = "lethal";
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
