@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BoBot_SuccessTag : MonoBehaviour {
 	public int nextRiddle;	
+	public bool final = false;
+	
 	private string fileToLoad = "";
 	
 	void Start () {
@@ -11,8 +13,12 @@ public class BoBot_SuccessTag : MonoBehaviour {
 	
 	void OnTriggerEnter (){
 		try {
-			BoBotGlobal.environment.setActiveRiddle (nextRiddle);
-			Save_Load.Write_Data_Player(fileToLoad, GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
+			if (!final){
+				BoBotGlobal.environment.setActiveRiddle (nextRiddle);
+				Save_Load.Write_Data_Player(fileToLoad, GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
+			} else {
+				BoBotGlobal.input_menu = 1f;	
+			}
 		}
 		catch {
 		}
