@@ -76,11 +76,12 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		base.bind();
 		distanceToBobot = BoBotGlobal.character.transform.position - this.otherToUse.gameObject.transform.position;
 		float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
-		deltaPos = ((x - (BoBotGlobal.character.transform.position.x + hand.position.x))) / timeTillPos;
+		//deltaPos = ((x - (BoBotGlobal.character.transform.position.x + hand.position.x))) / timeTillPos;
+		deltaPos = ((x - hand.position.x) - (BoBotGlobal.animator.GetFloat("Direction") * 0.75f))   / timeTillPos;
 		BoBotGlobal.physics_velocity = Vector3.zero;
 		//BoBotGlobal.character.Move (new Vector3(deltaPos, 0, 0)); // * Time.deltaTime);	
 		
-		Debug.Log ("hand "+ (BoBotGlobal.character.transform.position.x + hand.position.x) +"  "+x+ " d "+deltaPos);
+		Debug.Log ("hand "+ (hand.position.x) +"  "+x+ " d "+deltaPos);
 		/*
 		newPos = Vector3.zero;
 		newPos.x = -xx/2;
