@@ -303,9 +303,9 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				BoBotGlobal.particleSystem.Stop();
 			}
 			
-			if ( BoBotGlobal.collider_mainCollider.sensorActive("carry") != null){
+			/*if ( BoBotGlobal.collider_mainCollider.sensorActive("carry") != null){
 				return BoBotGlobal.state_carry;
-			}
+			}*/
 							
 			string sensor = BoBotGlobal.collider_mainCollider.sensorActive("climb");
 			if ((!BoBotGlobal.character.isGrounded && !BoBotGlobal.activePlatform) && sensor != null){				
@@ -374,12 +374,17 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 					BoBotGlobal.variable_actValueWalk = Mathf.SmoothDamp( BoBotGlobal.variable_actValueWalk, 1f, ref BoBotGlobal.variable_actVelocityWalk, 0.5f);
 					BoBotGlobal.collider_mainCollider.moveVertical (sensor, BoBotGlobal.speed_climbUpSpeed * BoBotGlobal.variable_actValueWalk );
 					if (sensor.Equals("climbEdge")){
+						BoBotGlobal.collider_mainCollider.release("climbEdge");
 						return BoBotGlobal.state_jump;
 					}
 					return BoBotGlobal.state_climb;
 				} else if (BoBotGlobal.input_verticalDirection < 0.0f && !BoBotGlobal.character.isGrounded){
 					BoBotGlobal.variable_actValueWalk = Mathf.SmoothDamp( BoBotGlobal.variable_actValueWalk, 1f, ref BoBotGlobal.variable_actVelocityWalk, 0.5f);
 					BoBotGlobal.collider_mainCollider.moveVertical (sensor, -BoBotGlobal.speed_climbDownSpeed * BoBotGlobal.variable_actValueWalk );
+					if (sensor.Equals("climbEdge")){
+						BoBotGlobal.collider_mainCollider.release("climbEdge");
+						return BoBotGlobal.state_jump;
+					}
 					return BoBotGlobal.state_climb;
 				}  
 			} else if (BoBotGlobal.character.isGrounded){ 
@@ -469,16 +474,24 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				
 					
 				if (BoBotGlobal.input_horizontalDirectionShort != 0.0f){	
-					BoBotGlobal.physics_isGravity = true;
-					BoBotGlobal.collider_mainCollider.release(sensor);
-					BoBotGlobal.animator.SetFloat ("Direction", BoBotGlobal.input_horizontalDirectionShort);
+					float absInput = BoBotGlobal.input_horizontalDirectionShort/Mathf.Abs(BoBotGlobal.input_horizontalDirectionShort);
+					if (sensor.Equals("climbEdge") && absInput == BoBotGlobal.animator.GetFloat("Direction")){
+						BoBotGlobal.collider_mainCollider.moveVertical(sensor, 1f);
+						BoBotGlobal.collider_mainCollider.release(sensor);
+					} else {
+						BoBotGlobal.physics_isGravity = true;
+						BoBotGlobal.collider_mainCollider.release(sensor);
+						BoBotGlobal.animator.SetFloat ("Direction", BoBotGlobal.input_horizontalDirectionShort);
+						
+						BoBotGlobal.physics_velocity = BoBotGlobal.character.velocity;
+						BoBotGlobal.physics_velocity.y += BoBotGlobal.speed_jumpSpeedUp*0.85f;
+						BoBotGlobal.physics_velocity.x += BoBotGlobal.speed_jumpSpeedForward*0.25f*BoBotGlobal.input_horizontalDirectionShort;
+						BoBotGlobal.animator.SetBool("hang", false);
+						BoBotGlobal.animator.SetBool("jump", true);
+						Debug.Log ("c1");
+					} 
 					
-					BoBotGlobal.physics_velocity = BoBotGlobal.character.velocity;
-					BoBotGlobal.physics_velocity.y += BoBotGlobal.speed_jumpSpeedUp*0.85f;
-					BoBotGlobal.physics_velocity.x += BoBotGlobal.speed_jumpSpeedForward*0.25f*BoBotGlobal.input_horizontalDirectionShort;
-					BoBotGlobal.animator.SetBool("hang", false);
-					BoBotGlobal.animator.SetBool("jump", true);
-					Debug.Log ("c1");
+					
 					return BoBotGlobal.state_jumpToOtherLadder;
 				}
 				
@@ -562,6 +575,10 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 			BoBotGlobal.animator.SetBool("hangle", false);			
 			BoBotGlobal.animator.SetBool("idle", false);
 			BoBotGlobal.physics_isGravity = true;
+			
+			/*if (BoBotGlobal.collider_mainCollider.sensorActive("climb")){
+				//BoBotGlobal.collider_mainCollider.release("climb");	
+			}*/
 		}
 		
 		public override BoBot_FSMState transition(){		
@@ -995,6 +1012,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 		
 			//calcBackgroundPosition();
 			BoBotGlobal.physics_movement = Vector3.zero;
+			BoBotGlobal.animator.SetBool("isGrounded", BoBotGlobal.character.isGrounded || BoBotGlobal.activePlatform);
 		
 			Vector3 pos = bobotTransform.position;
 			pos.z = originZ;// * Time.deltaTime - pos.z;		
@@ -1051,7 +1069,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				}
 			}
 			
-			if (BoBotGlobal.physics_isGravity){
+			if (BoBotGlobal.physics_isGravity && BoBotGlobal.physics_velocity.sqrMagnitude < 1000f ){
 				BoBotGlobal.physics_movement += BoBotGlobal.physics_velocity;
 				BoBotGlobal.physics_movement += Physics.gravity;
 			}		

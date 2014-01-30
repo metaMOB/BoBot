@@ -80,19 +80,25 @@ public class BoBot_MainCollider : MonoBehaviour {
 		try { newObject = other.transform.parent.gameObject; }
 		catch (Exception e){ }		
 		if (newObject == null){	newObject = other.gameObject; }	
-		*/		
-		foreach ( BoBot_ActionColliderGeneric sensor in sensors.Values){			
-			Vector2 relDist = newDist;
-			//relDist.x = Mathf.Clamp (relDist.x * Mathf.Abs( BoBotGlobal.input_horizontalDirection), 0.1f, 1f);
-			try {
-				if (other.tag != "Untagged"){
-					visual.transform.position = mainCollider.transform.position + otherDistance;
-					sensor.check(newDist, other, relDist);
+		*/
+		
+		
+			foreach ( BoBot_ActionColliderGeneric sensor in sensors.Values){			
+				Vector2 relDist = newDist;
+				//relDist.x = Mathf.Clamp (relDist.x * Mathf.Abs( BoBotGlobal.input_horizontalDirection), 0.1f, 1f);
+				try {
+					if (other.tag != "Untagged"){
+						if (BoBotGlobal.debugging){
+							visual.transform.position = mainCollider.transform.position + otherDistance;
+							visual.GetComponent<TextMesh>().text = other.name;
+						}
+						sensor.check(newDist, other, relDist);
+					}
 				}
-			}
-			catch {
-			}
-		}			
+				catch {
+				}
+			}			
+		
 	}
 	
 	public void bind (string name){
