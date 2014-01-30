@@ -57,21 +57,10 @@ public class BoBot_SensorPlate : MonoBehaviour {
 					foreach (BoBot_ControlComponent controller in controllers){
 						controller.setValue (0, channel);
 					}
-					//timerOff = 0f;
 					timer = 0f;	
 					running = false;
 				}
 			}
-			
-			/*if (!onlyOn) {
-				timerOff += Time.deltaTime;
-				if (timerOff > delayOff){
-					foreach (BoBot_OnOffComponent controller in controllers){
-						controller.setValue (0);
-						timer = 0f;
-					}
-				}
-			}*/
 			
 			numElements = 0;
 		}
