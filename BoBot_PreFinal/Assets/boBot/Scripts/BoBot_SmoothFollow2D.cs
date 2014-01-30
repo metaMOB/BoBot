@@ -115,7 +115,7 @@ private Vector3 shaker = Vector3.zero;
 			//pos.x = valuesPosition.x;
 			//pos.y = valuesPosition.y;
 			//backgroundCamera.transform.position = pos;
-			backgroundCameras[i].orthographicSize = orthSize + i+1;
+			backgroundCameras[i].orthographicSize = orthSize - (i+1);
 		}
 	}
 	

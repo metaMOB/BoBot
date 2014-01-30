@@ -93,6 +93,7 @@
      <Compile Include="Assets\boBot\Scripts\Components\BoBot_HitCounterComponent.cs" />
      <Compile Include="Assets\boBot\Scripts\Components\BoBot_InverseGravityComponent.cs" />
      <Compile Include="Assets\boBot\Scripts\Components\BoBot_LevelBGComponent.cs" />
+     <Compile Include="Assets\boBot\Scripts\Components\BoBot_ParticleComponent.cs" />
      <Compile Include="Assets\boBot\Scripts\Components\BoBot_PulsingComponent.cs" />
      <Compile Include="Assets\boBot\Scripts\Components\BoBot_RiddleComponent.cs" />
      <Compile Include="Assets\boBot\Scripts\Components\BoBot_SoundComponent.cs" />
