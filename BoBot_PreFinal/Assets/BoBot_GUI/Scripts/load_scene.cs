@@ -6,12 +6,11 @@ public class load_scene : MonoBehaviour {
 	
 	
 	private bool isPause = false;
-	private Rect butRect;
-	private float ctrlWidth = 200.0f;
-	private float ctrlHeight = 350.0f;
 	private SceneFader sceneFader;
 	public GUISkin menu;
 	string Level = "DemoLevel_01";
+	
+	public Texture2D background;
 	
 	string myName = "PlayerOne";
 	string meinTimestamp = "";
@@ -20,30 +19,31 @@ public class load_scene : MonoBehaviour {
 	private string file_to_load ="";
 	ArrayList ar = new ArrayList();
 	
+	float dpi =160;
+	
 	// Use this for initialization
 	void Start () {
 		sceneFader = GameObject.FindGameObjectWithTag ("GameController").GetComponent<SceneFader> ();
-		butRect = new Rect ((Screen.width - ctrlWidth)/2, 100, ctrlWidth, ctrlHeight);
-		
-		
+			
 		file_to_load = static_holder.file_to_load;
-		Debug.Log(Application.persistentDataPath);
+		
 		if(file_to_load !=""){
 			
-		Read_Data(file_to_load);
+			Read_Data(file_to_load);
 		
-		}
+		}//if
 		else{
 			meinTimestamp = System.DateTime.Now.ToString();
 			meinLevel = Level;
-			file_to_load = "\\boBot\\Gamesave\\Game\\" + myName + System.DateTime.Now.Day.ToString() + System.DateTime.Now.Month.ToString() + System.DateTime.Now.Year.ToString() + System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() + System.DateTime.Now.Second.ToString() + ".sav";
+			file_to_load = "//boBot//Gamesave//Game//" + myName + System.DateTime.Now.Day.ToString() + System.DateTime.Now.Month.ToString() + System.DateTime.Now.Year.ToString() + System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() + System.DateTime.Now.Second.ToString() + ".sav";
 			Save_Load.Gamesave_Player_schreiben(myName,meinLevel,meinTimestamp,file_to_load,GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
-			
+			static_holder.file_to_load = file_to_load;
 			Read_Data(file_to_load);
-		}
+		}//else
 		
-	}
+	}//start
 	
+	//Lesen der Player Datei und Inhalt in eine ArrayList hinterlegen
 	void Read_Data(string yourFile){
 		StreamReader sr = new StreamReader(Application.persistentDataPath + yourFile);
 		
@@ -59,6 +59,7 @@ public class load_scene : MonoBehaviour {
 		instance_Data();
 	}
 	
+	//Auslesen der ArrayList und setzen des Players an die ausgelesene Position
 	void instance_Data(){
 		
 		for(int i =0; i < ar.Count; i=i+4){
@@ -74,23 +75,32 @@ public class load_scene : MonoBehaviour {
 		}
 	}	
 	
+	//Pausenmenü
 	void OnGUI(){
 
-
 		if (isPause) {
+			
+			GUI.DrawTexture(new Rect (0,0,Screen.width,Screen.height),background);
 			GUI.skin = menu;
-			GUILayout.BeginArea (butRect);
-
+			
+			if(Screen.dpi >0){
+				dpi = Screen.dpi;
+			}
+			menu.button.fontSize = (int)((dpi/160)*30);
+			menu.label.fontSize = (int)((dpi/160)*60);
+			
+			GUILayout.BeginArea(new Rect((Screen.width/2)-150,(Screen.height/2)-150,512,512));
+				
+			GUILayout.Label("Pause");
+			
 			if(GUILayout.Button("Weiter")){
 				ToggleTimeScale();
 			}
-			
-			if(GUILayout.Button("Speichern")){
-				
-				Save_Load.Write_Data_Player(file_to_load,GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
-			}
 
 			if(GUILayout.Button("Spiel beenden")){
+				
+				AudioFade.MenueIsActive(true);
+				
 				ToggleTimeScale();
 				sceneFader.SwitchScene("StartMenu");
 			}
@@ -109,11 +119,19 @@ public class load_scene : MonoBehaviour {
 		}
 		isPause = !isPause;
 	}
+	
 	// Update is called once per frame
 	void Update () {
 	
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			ToggleTimeScale();
-		}
+		#if UNITY_STANDALONE || UNITY_EDITOR || UNITY_ANDROID		
+		
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				ToggleTimeScale();
+			}//if
+		
+		#elif UNITY_IPHONE 
+		
+		#endif
+		
 	}
-}
+}//class

@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BoBot_GUI\Scripts\AspectUtility.cs" />
+     <Compile Include="Assets\BoBot_GUI\Scripts\AudioFade.cs" />
      <Compile Include="Assets\BoBot_GUI\Scripts\GUITest.cs" />
      <Compile Include="Assets\BoBot_GUI\Scripts\GuiMenu.cs" />
+     <Compile Include="Assets\BoBot_GUI\Scripts\MoveKiste.cs" />
      <Compile Include="Assets\BoBot_GUI\Scripts\Save_Load.cs" />
      <Compile Include="Assets\BoBot_GUI\Scripts\SceneFader.cs" />
      <Compile Include="Assets\BoBot_GUI\Scripts\load_scene.cs" />

@@ -12,6 +12,8 @@ public class Save_Load : MonoBehaviour {
 	
 	public static void Save_Directory(){
 		
+		Debug.Log(Application.persistentDataPath);
+		
 		if(!Directory.Exists(Application.persistentDataPath + "//boBot//Gamesave")){
 			Directory.CreateDirectory(Application.persistentDataPath + "//boBot//Gamesave");
 			Directory.CreateDirectory(Application.persistentDataPath + "//boBot//Gamesave//Player");
@@ -24,6 +26,7 @@ public class Save_Load : MonoBehaviour {
 		}
 	}
 	
+	//Auslesen der Savings-Datei und Inhalt in eine ArrayList hinzufügen
 	static void Gamesave_player_lesen(){
 		
 		ar_Player.Clear();
