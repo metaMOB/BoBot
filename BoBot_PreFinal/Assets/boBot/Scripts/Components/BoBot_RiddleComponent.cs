@@ -15,6 +15,7 @@ public class BoBot_RiddleComponent : BoBot_OnOffComponent {
 	public AudioClip earthQuakeSound;
 	
 	private BoBot_DebugComponent debugInfo;
+	private bool done = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,7 @@ public class BoBot_RiddleComponent : BoBot_OnOffComponent {
 			debugInfo.addText ("> A/H/R "+attackTime+"/"+holdTime+"/"+releaseTime);
 		}
 		
-		if (!isRunning && state){
+		if (!isRunning && state && !done){
 			isRunning = true;
 			timer = 0f;
 			cameraComponent.shakeItBaby(0f, intensity, attackTime, earthQuakeSound);
@@ -55,6 +56,7 @@ public class BoBot_RiddleComponent : BoBot_OnOffComponent {
 					emitter.Stop();		
 				}
 				isRunning = false;
+				done = true;
 			}
 		}
 	}
