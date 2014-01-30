@@ -3,7 +3,6 @@ using System.Collections;
 
 public class BoBot_MoveableObject : MonoBehaviour {
 
-	// Use this for initialization
 	public Transform jointToDeleteAtHitA;
 	public Transform jointToDeleteAtHitB;
 	public int numberOfJumpsTillRemove = 1;
@@ -12,10 +11,8 @@ public class BoBot_MoveableObject : MonoBehaviour {
 	public bool active = false;
 	public bool recievePlayerForce = false;
 	public bool canBeCarried = false;
-	//private CharacterJoint join;
 	
 	void Start () {
-		//CharacterJoint joint = jointToDeleteAtHit.GetComponent<CharacterJoint>();
 		active=!(jointToDeleteAtHitA == null && jointToDeleteAtHitB == null);		
 			
 		if (GetComponent<CharacterJoint>().connectedBody == null){
@@ -37,13 +34,11 @@ public class BoBot_MoveableObject : MonoBehaviour {
 		if (active && numberOfJumps >= numberOfJumpsTillRemove){
 			actAsParent = false;
 			if (jointToDeleteAtHitA){
-				//Destroy(jointToDeleteAtHitA.gameObject);
 				jointToDeleteAtHitA.rigidbody.useGravity = true;
 				Destroy(jointToDeleteAtHitA.GetComponent<CharacterJoint>());		
 			}
 			
-			if (jointToDeleteAtHitB){
-				//Destroy(jointToDeleteAtHitB.gameObject);	
+			if (jointToDeleteAtHitB){	
 				jointToDeleteAtHitA.rigidbody.useGravity = true;
 				Destroy(jointToDeleteAtHitB.GetComponent<CharacterJoint>());
 			}
@@ -51,7 +46,7 @@ public class BoBot_MoveableObject : MonoBehaviour {
 			gameObject.layer = 11;
 			recievePlayerForce = false;
 			active = false;
-			Destroy(GetComponent<CharacterJoint>()); //.connectedBody, = gameObject.rigidbody;			
+			Destroy(GetComponent<CharacterJoint>());	
 		}
 	}	
 }

@@ -16,7 +16,6 @@ public class BoBot_MainCollider : MonoBehaviour {
 	void Start () {		
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
 		visual = GameObject.Find("Visual");
-		
 			
 		BoBot_ActionColliderGeneric [] colliders = gameObject.GetComponents<BoBot_ActionColliderGeneric>();
 		foreach (BoBot_ActionColliderGeneric collider in colliders){
@@ -24,8 +23,6 @@ public class BoBot_MainCollider : MonoBehaviour {
 			Debug.Log (collider.sensorValueGroup+"   "+collider.sensorValue);
 		}
 		
-		
-		//Physics.IgnoreLayerCollision(10, 0);
 		Physics.IgnoreLayerCollision(10, 1);
 		Physics.IgnoreLayerCollision(10, 2);
 		Physics.IgnoreLayerCollision(10, 3);
@@ -35,12 +32,8 @@ public class BoBot_MainCollider : MonoBehaviour {
 		Physics.IgnoreLayerCollision(10, 7);
 		Physics.IgnoreLayerCollision(10, 8);
 	}
-	
-	// Update is called once per frame
-	
-	void Update (){
 		
-		
+	void Update (){		
 		if (BoBotGlobal.debugging && debugInfo){			
 			foreach (string sensor in sensors.Keys){
 				debugInfo.addText("> "+sensor+" active: "+ sensors[sensor].isUseable);
@@ -49,19 +42,9 @@ public class BoBot_MainCollider : MonoBehaviour {
 		
 		foreach (BoBot_ActionColliderGeneric sensor in sensors.Values){	
 			sensor.updateState();
-			/*
-			
-			*/
 		}	
 	}
 	
-	void FixedUpdate(){
-		//Dictionary<string, boBot_ActionColliderGeneric> sensorsTemp = new Dictionary<string, boBot_ActionColliderGeneric>();
-		
-		
-			
-	}
-		
 	void OnTriggerStay (Collider other){
 		Transform mainCollider = BoBotGlobal.collider_mainCollider.transform;		
 		Vector3 otherDistance = (other.ClosestPointOnBounds (mainCollider.position) - mainCollider.transform.position);
@@ -75,34 +58,23 @@ public class BoBot_MainCollider : MonoBehaviour {
 				Debug.Log ("Er ist Tot Jim!!!");	
 			}
 		}
-		
-		/*GameObject newObject = null;		
-		try { newObject = other.transform.parent.gameObject; }
-		catch (Exception e){ }		
-		if (newObject == null){	newObject = other.gameObject; }	
-		*/
-		
-		
-			foreach ( BoBot_ActionColliderGeneric sensor in sensors.Values){			
-				Vector2 relDist = newDist;
-				//relDist.x = Mathf.Clamp (relDist.x * Mathf.Abs( BoBotGlobal.input_horizontalDirection), 0.1f, 1f);
-				try {
-					if (other.tag != "Untagged"){
-						if (BoBotGlobal.debugging){
-							visual.transform.position = mainCollider.transform.position + otherDistance;
-							visual.GetComponent<TextMesh>().text = other.name;
-						}
-						sensor.check(newDist, other, relDist);
+				
+		foreach ( BoBot_ActionColliderGeneric sensor in sensors.Values){			
+			Vector2 relDist = newDist;
+			try {
+				if (other.tag != "Untagged"){
+					if (BoBotGlobal.debugging){
+						visual.transform.position = mainCollider.transform.position + otherDistance;
+						visual.GetComponent<TextMesh>().text = other.name;
 					}
+					sensor.check(newDist, other, relDist);
 				}
-				catch {
-				}
-			}			
+			} catch {}
+		}			
 		
 	}
 	
 	public void bind (string name){
-		//Debug.Log ("tryBind "+name);
 		sensors[name].bind();
 		isBound = sensors[name].sensorValueGroup;
 	}
@@ -121,22 +93,7 @@ public class BoBot_MainCollider : MonoBehaviour {
 	public void moveHorizontal (string collider, float direction){
 		sensors[collider].moveHorizontal (direction);
 	}
-	
-	/*public void bind(string collider){
-		Debug.Log ("BIND "+ currentColliderObject.name);
-		//currentCollider.bind (ref currentColliderObject);	
-		//sensors[collider].bind (ref sensorsOtherCollider[collider]);
-		sensors[collider].tryToBind = true;
-	}
-	
-	public void release(string collider){
-		Debug.Log ("RELEASE "+ currentColliderObject.name);
-		sensors[collider].tryToRelease = true;
-		//tryToBind[collider] = false;
-		//sensors[collider].release(); 
-		//currentCollider.release ();
-	}*/
-	
+		
 	public string getCurrentSensors(){
 		string output = "";
 		foreach (string sensor in sensors.Keys){
@@ -153,16 +110,7 @@ public class BoBot_MainCollider : MonoBehaviour {
 			if ( (isBound.Equals("") || isBound.Equals(name)) && sensor.sensorValueGroup.Equals(name) && sensor.isUseable){
 				return sensor.sensorValue;	
 			}
-		}
-		
-		/*if (sensors.ContainsKey(name) && sensors[name].isUseable){
-			return name;	
-		}*/
+		}		
 		return null;
-		//return sensors[name].isUseable();
 	}
-	
-	//public Dictionary <string, BoBot_SensorCollider> getActiveSensors(){
-	//	return BoBotGlobal.sensor_active;
-	//}
 }

@@ -18,14 +18,11 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 	
 	private float posTimer = 0f;
 	private float timeTillPos = 0.5f;
-	private float deltaPos;
-	
+	private float deltaPos;	
 		
 	private Vector3 newPos;
 	void Awake () {		
 		this.reactOnTag = "canControl";
-		// Left 0.2 / -0.1
-		// Right 
 		this.distance = new Rect(0f, -0.2f, 0.35f, 0.4f);
 		this.sensorValue = "control";
 		this.sensorValueGroup = "control";
@@ -33,14 +30,8 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		hand = GameObject.Find("hand_r").GetComponent<Transform>();
 	}
 	
-	/*public void FixedUpdate (){
-		if (isBound){ // && this.otherToUse.rigidbody){
-			
-		}
-	}*/
-	
 	public void Update (){
-		if (isBound){ // && this.otherToUse.rigidbody){
+		if (isBound){
 			if (posTimer < timeTillPos){
 				BoBotGlobal.character.Move (new Vector3(deltaPos, 0, 0) * Time.deltaTime);	
 				posTimer += Time.deltaTime;
@@ -62,8 +53,6 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 			newPos = Vector3.zero;
 			
 			float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().moveSwitch(-BoBotGlobal.input_horizontalDirection).x;
-			//float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
-			//newPos.x =  ((x - hand.position.x) - 0.7f * dir) ;
 			newPos.x = x;
 			Debug.Log ("   sadasd "+x);
 			BoBotGlobal.character.Move (newPos);
@@ -76,19 +65,9 @@ public class BoBot_ControlCollider : BoBot_ActionColliderGeneric {
 		base.bind();
 		distanceToBobot = BoBotGlobal.character.transform.position - this.otherToUse.gameObject.transform.position;
 		float x = this.otherToUse.gameObject.transform.parent.GetComponent<BoBot_Switch>().getPos().x;
-		//deltaPos = ((x - (BoBotGlobal.character.transform.position.x + hand.position.x))) / timeTillPos;
 		deltaPos = ((x - hand.position.x) - (BoBotGlobal.animator.GetFloat("Direction") * 0.75f))   / timeTillPos;
 		BoBotGlobal.physics_velocity = Vector3.zero;
-		//BoBotGlobal.character.Move (new Vector3(deltaPos, 0, 0)); // * Time.deltaTime);	
 		
-		Debug.Log ("hand "+ (hand.position.x) +"  "+x+ " d "+deltaPos);
-		/*
-		newPos = Vector3.zero;
-		newPos.x = -xx/2;
-		
-		
-		BoBotGlobal.character.Move (newPos * 1.5f);
-		*/
 		posTimer = 0f;
 		BoBotGlobal.animator.SetBool("canCarry", true);
 	}	

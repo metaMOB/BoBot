@@ -16,7 +16,6 @@ public class BoBot_Chain_Element : MonoBehaviour {
 	public float distance;
 	public bool openEnd = false;
 		
-	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
 		playerScript = player.GetComponent<BoBot_SidescrollControl>();

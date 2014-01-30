@@ -11,10 +11,8 @@ public class BoBot_CameraTag : MonoBehaviour {
 	
 	private BoBot_DebugComponent debugInfo;
 			
-	// Use this for initialization
 	void Start () {
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
-		//Physics.IgnoreLayerCollision (0,0);
 		Physics.IgnoreLayerCollision (0,1);
 		Physics.IgnoreLayerCollision (0,2);
 		Physics.IgnoreLayerCollision (0,3);
@@ -22,13 +20,8 @@ public class BoBot_CameraTag : MonoBehaviour {
 		Physics.IgnoreLayerCollision (0,5);
 		Physics.IgnoreLayerCollision (0,6);
 		Physics.IgnoreLayerCollision (0,7);
-		//Physics.IgnoreLayerCollision (0,9);
 		Physics.IgnoreLayerCollision (0,10);
-		
-		
 		cameraComponent = GameObject.Find("Main Camera").GetComponent<BoBot_SmoothFollow2D>();
-
-		
 	}
 	
 	void Update(){
@@ -44,10 +37,4 @@ public class BoBot_CameraTag : MonoBehaviour {
 			cameraComponent.setZoomLevel (this.zoomLevelEnter, this.durationEnter);
 		}
 	}
-	
-	/*void OnTriggerExit(Collider other){
-		if (other.CompareTag ("Player")){ 
-			cameraComponent.setZoomLevel (this.zoomLevelExit, this.durationExit);
-		}
-	}*/
 }

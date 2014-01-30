@@ -25,28 +25,25 @@ public class BoBot_GearComponent : BoBot_OnOffComponent {
 		connectedRotation = Vector3.zero;
 		gearSoundRun = gameObject.AddComponent<AudioSource>();
 		gearSoundRun.clip = audioRunning;
-		gearSoundRun.minDistance = 1f;
-		gearSoundRun.maxDistance = 10f;
+		/*gearSoundRun.minDistance = 1f;
+		gearSoundRun.maxDistance = 10f;*/
 		
 		gearSoundStop = gameObject.AddComponent<AudioSource>();
 		gearSoundStop.clip = audioStop;
-		gearSoundStop.minDistance = 1f;
-		gearSoundStop.maxDistance = 10f;
+		/*gearSoundStop.minDistance = 1f;
+		gearSoundStop.maxDistance = 10f;*/
 		
 		if (connectedGear){
 			connGear = connectedGear.GetComponent<BoBot_GearComponent>();
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	void Update () {		
 		if (val > gateUpper/2){
 			if (!gearSoundStop.isPlaying){
 				gearSoundStop.loop = false;
 				gearSoundStop.Play();	
-			}
-			
+			}			
 			gearSoundStop.volume = (val-gateUpper/2) * 10 * gearVolume * 3;
 		} else {
 			if (gearSoundStop.isPlaying){	
@@ -65,20 +62,14 @@ public class BoBot_GearComponent : BoBot_OnOffComponent {
 					gearSoundRun.volume = gearVolume;
 					gearSoundRun.Play();
 				}
-				
 				factor = val;
-			
-			
-			
+				
 				if (startRunning){
 					factor = 1f - factor;
 				}
-		
-				
 				
 				Vector3 rotationSpeedVectorNew = rotationSpeedVector * factor + (connectedRotation / this.transform.localScale.x);
 				transform.Rotate(rotationSpeedVectorNew * Time.deltaTime);
-				//transform.Rotate(connectedRotation / this.transform.localScale.x * Time.deltaTime);
 				
 				if (connectedGear){
 					connGear.setRotation (-rotationSpeedVectorNew * this.transform.localScale.x);

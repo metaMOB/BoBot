@@ -33,7 +33,6 @@ public class BoBot_Switch : MonoBehaviour {
 	
 	private BoBot_DebugComponent debugInfo;
 	
-	// Use this for initialization
 	void Start () {
 		debugInfo = gameObject.GetComponentInChildren<BoBot_DebugComponent>();
 		anglePerSec = angleMinMax / timeTillOff ;
@@ -41,9 +40,7 @@ public class BoBot_Switch : MonoBehaviour {
 		
 		GameObject currObj = this.gameObject;
 		while (currObj.GetComponent<BoBot_RiddleComponent>() == null){
-			//if (currObj.transform.parent && currObj.transform.parent.gameObject){
-				currObj = currObj.transform.parent.gameObject;	
-			//}
+			currObj = currObj.transform.parent.gameObject;	
 		}
 		
 		foreach (GameObject obj in control){
@@ -51,17 +48,9 @@ public class BoBot_Switch : MonoBehaviour {
 			foreach (BoBot_ControlComponent cmp in cmps){
 				controlComponents.Add(cmp);
 			}			
-			
-			/*
-			cmps = obj.GetComponentsInChildren<BoBot_ControlComponent>();
-			foreach (BoBot_ControlComponent cmp in cmps){
-				controlComponents.Add(cmp);
-			}*/		
 		}
 				
 		riddle = currObj.GetComponent<BoBot_RiddleComponent>();
-		//angle = -45;
-		//this.gameObject.transform.FindChild("Hebel").transform.RotateAround (rotPoint, axis, -45); 
 	}
 	
 	public Vector3 moveSwitch (float direction){
@@ -82,11 +71,8 @@ public class BoBot_Switch : MonoBehaviour {
 					foreach (BoBot_ControlComponent animate in controlComponents){						
 						animate.setValue(dir, channel);
 					}
-					//Debug.Log ("angel "+angle);
 				}
-			}
-	//		Debug.Log (" " + this.gameObject.transform.FindChild("Hebel").collider.transform.localPosition.x+ "  " );
-			
+			}			
 		}
 		return this.gameObject.transform.FindChild("Hebel").transform.position - old;
 	}
@@ -95,7 +81,6 @@ public class BoBot_Switch : MonoBehaviour {
 		return this.gameObject.transform.FindChild("Hebel").transform.FindChild("Griff").transform.position;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (BoBotGlobal.debugging && debugInfo){
 			debugInfo.addText ("Switch");

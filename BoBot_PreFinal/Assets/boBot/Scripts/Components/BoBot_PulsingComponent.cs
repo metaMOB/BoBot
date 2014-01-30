@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class BoBot_PulsingComponent : BoBot_OnOffComponent {
 
-	// Use this for initialization
 	private float fadePulseVelocity;
 	private float actualValue;
 	private float targetVal;
@@ -22,11 +21,9 @@ public class BoBot_PulsingComponent : BoBot_OnOffComponent {
 		frequency = 1f/frequency;
 	}
 	
-	// Update is called once per frame
 	void LateUpdate () {
 		if (state){
 			actualValue = Mathf.SmoothDamp(actualValue, targetVal, ref fadePulseVelocity, frequency/2f);
-			//Debug.Log ("ac "+actualValue+"  "+targetVal);
 			clr.a = actualValue;
 			renderer.material.color = clr;
 			

@@ -4,29 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public static class BoBotGlobal {
-		//public static bool sensor_canClimbUp = false;
-		//public static bool sensor_canClimbDown = false;
 		public enum controlMode {onOff, hold};
 		public enum controlDirection {horizontal, vertical};
 	
 		public static bool sensor_wallCollision = false;
-	
-		//public static Dictionary <string, BoBot_SensorCollider> sensor_active = new Dictionary<string, BoBot_SensorCollider>();
-	
-		//public static bool sensor_canClimbRope = false;
-		//public static float sensor_distanceToEdge = 100f;		
-		//public static float sensor_distanceToCarry = 100f;	
-		
-		//public static bool sensor_climb = false;
-		//public static bool sensor_carry = false;
-	
-			/*public static float key_keyLeft;
-		public static float key_keyRight;
-		public static float key_keyUp;
-		public static float key_keyDown;
-		public static float key_keyJump;
-		public static float key_keyAction;
-		public static float key_keyNull;*/
 	
 		public static float input_verticalDirection = 0f;
 		public static float input_horizontalDirection = 0f;
@@ -67,7 +48,7 @@ public static class BoBotGlobal {
 		public static float time_timeTillWalk = 0.25f;		
 		public static float time_timeTillIdle = 0.25f;
 		public static float time_timeTillCarry = 1.5f;
-		public static float time_timeTillIdleClimbJump = 0.25f; // 0 to 1 Second
+		public static float time_timeTillIdleClimbJump = 0.25f;
 		public static float time_timeUntilShortInput = 0.25f;
 		public static float time_timeTillReload = 5f;		
 		
@@ -84,21 +65,12 @@ public static class BoBotGlobal {
 		public static Transform activePlatform;
 		public static BoBot_EnvironmentComponent environment;
 		
-		//public static Rect distance_climb = Rect(-0.15f, 0f, 0.15f, 0.45f);
-		//0.15f;
-		//public static float distance_climbY = 0.45f;
 		public static float distance_cameraYOffset = 2.0f;
 	
 		public static Animator animator;
 		public static CharacterController character;
 	
-		//public static boBot_CarryCollider collider_carryCollider;
-		//public static boBot_MainColliderGeneric collider_climbLadderCollider;
-		//public static boBot_MainColliderGeneric collider_climbRopeCollider;
 		public static BoBot_MainCollider collider_mainCollider;
-		
-		//public static boBot_ActionColliderGeneric collider_climbCollider;
-		
 		
 		public static Vector3 physics_movement;
 		public static Vector3 physics_velocity;
@@ -112,6 +84,9 @@ public static class BoBotGlobal {
 		public static float variable_fallingTime = 0f;		
 		
 		public static bool debugging = false;
+	
+		public static bool godMode = false;
+		public static int levelCheat = 1;
 	
 		public static int state_currentState;
 	

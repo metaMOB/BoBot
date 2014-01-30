@@ -6,27 +6,20 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 	public float gateLower = 0.25f;
 	public float gateUpper = 0.75f;
 	public bool startRunning;
-	public bool manualControl;
-	
+	public bool manualControl;	
 	
 	public AudioClip audioOn;
 	public AudioClip audioOnLoop;
-	public AudioClip audioOff;
-	
+	public AudioClip audioOff;	
 	
 	public float volume = 0.5f;
 	public float fadeInOutTime = 1f;
+	public bool isReady = false;
 	
 	private AudioSource loopSound;
 	private AudioSource changeSound;
 	private float fadeVelocity;
 	
-	public bool isReady = false;
-	
-	//private AudioClip currentClip;
-	//private AudioClip nextClip;
-	//private bool loopNextClip;
-	//private AudioSource audioSource;
 	private float valOld = 0;
 	private bool playLoopSound = false;
 	
@@ -37,11 +30,12 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 		changeSound = this.gameObject.AddComponent<AudioSource>();
 		loopSound.volume = volume;
 		changeSound.volume = volume;
+		/*
 		loopSound.minDistance = 1f;
 		changeSound.minDistance = 1f;
 		loopSound.maxDistance = 10f;
 		changeSound.maxDistance = 10f;
-		
+		*/		
 		loopSound.playOnAwake = false;
 		changeSound.playOnAwake = false;
 		
@@ -49,8 +43,6 @@ public class BoBot_OnOffComponent : BoBot_ControlComponent {
 			loopSound.clip = audioOnLoop;
 			loopSound.loop = true;
 		}
-		//audioSource = gameObject.AddComponent<AudioSource>();		
-		//audioSource.Play();
 	}
 	
 	void LateUpdate(){
