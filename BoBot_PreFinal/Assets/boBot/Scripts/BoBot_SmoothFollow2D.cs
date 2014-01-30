@@ -109,13 +109,14 @@ private Vector3 shaker = Vector3.zero;
 		float orthSize = Mathf.SmoothDamp( thisCamera.orthographicSize, targetZoom, ref zoomVelocity, zoomDuration);
 		thisCamera.orthographicSize = orthSize;
 		//foreach (Camera backgroundCamera in backgroundCameras){
+		int ort = 1;
 		for (int i = 0; i < backgroundCameras.Length; i++){
 			
 			//Vector3 pos = backgroundCamera.transform.position;
 			//pos.x = valuesPosition.x;
 			//pos.y = valuesPosition.y;
 			//backgroundCamera.transform.position = pos;
-			backgroundCameras[i].orthographicSize = orthSize - (i+1);
+			backgroundCameras[i].orthographicSize = orthSize + (backgroundCameras.Length-i);
 		}
 	}
 	

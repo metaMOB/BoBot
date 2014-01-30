@@ -322,7 +322,8 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 			
 			if ( (BoBotGlobal.input_verticalDirectionShort > 0.0f || BoBotGlobal.input_verticalDirection > 0.0f) && (BoBotGlobal.character.isGrounded || BoBotGlobal.activePlatform)){
 				//BoBotGlobal.physics_velocity = BoBotGlobal.character.velocity;
-				BoBotGlobal.physics_velocity.y = BoBotGlobal.speed_jumpSpeedUp;
+				BoBotGlobal.physics_velocity.y = BoBotGlobal.speed_jumpSpeedUp;			
+								
 				BoBotGlobal.animator.SetBool("jump", true);
 				return BoBotGlobal.state_jump;
 			} 
@@ -591,6 +592,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 			newRot.z = 0.0f;
 			BoBotGlobal.character.transform.rotation =  Quaternion.Slerp(BoBotGlobal.character.transform.rotation, newRot, 5f * Time.deltaTime);
 			BoBotGlobal.physics_velocity.y += Physics.gravity.y * Time.deltaTime;
+						
 			airDirection = 0.0f;
 			
 			string sensor = BoBotGlobal.collider_mainCollider.sensorActive("climb");
@@ -1027,11 +1029,12 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 				BoBotGlobal.physics_isGravity = true;
 				BoBotGlobal.physics_velocity = Vector3.zero;
 				deathTimer += Time.deltaTime;
-			    eye.GetComponent<Light>().intensity = eyeIntensity * (1- (deathTimer/BoBotGlobal.time_timeTillReload));
+			    
 				if (deathTimer > BoBotGlobal.time_timeTillReload){
 					deathTimer = 0f;
 					sceneFader.SwitchScene (Save_Load.ar_Player[1].ToString());
 				}
+				eye.GetComponent<Light>().intensity = eyeIntensity * (1- (deathTimer/BoBotGlobal.time_timeTillReload));
 			} else {
 				
 				if (BoBotGlobal.activePlatform != null) {
