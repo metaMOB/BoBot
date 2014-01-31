@@ -12,18 +12,25 @@ public class BoBot_SuccessTag : MonoBehaviour {
 		sceneFader = GameObject.FindGameObjectWithTag("GameController").GetComponent<SceneFader>();
 	}
 	
-	void OnTriggerEnter (){
-		if(final){
-			sceneFader.SwitchScene("StartMenu");	
-		}else {
-			
-			try {
-				BoBotGlobal.environment.setActiveRiddle (nextRiddle);
-				Save_Load.Write_Data_Player(fileToLoad, GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
+	void OnTriggerEnter (Collider other){
+		if(other.CompareTag("Player")){
+		 	
+		
+			if(final){
+				sceneFader.SwitchScene("StartMenu");	
+			}else {
+				
+				try {
+					BoBotGlobal.environment.setActiveRiddle (nextRiddle);
+					Debug.Log("save1 ");
+					
+					Save_Load.Write_Data_Player(Save_Load.ar_Player[3].ToString(), GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
+					Debug.Log("save2 ");
+				}
+				catch {
+				}	
+				
 			}
-			catch {
-			}	
-			
 		}
 	}
 }
