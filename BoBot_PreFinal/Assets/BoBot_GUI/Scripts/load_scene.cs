@@ -123,15 +123,10 @@ public class load_scene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		#if UNITY_STANDALONE || UNITY_EDITOR || UNITY_ANDROID		
 		
-			if (Input.GetKeyDown (KeyCode.Escape)) {
+			if (BoBotGlobal.input_menu > 0) {
 				ToggleTimeScale();
-			}//if
-		
-		#elif UNITY_IPHONE 
-		
-		#endif
-		
+			}
+	
 	}
 }//class
