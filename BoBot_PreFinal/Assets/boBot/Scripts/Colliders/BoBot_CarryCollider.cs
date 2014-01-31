@@ -45,8 +45,8 @@ public class BoBot_CarryCollider : BoBot_ActionColliderGeneric {
 				BoBotGlobal.animator.SetBool("pull", false);
 			}
 			
-			BoBotGlobal.physics_velocity = new Vector3( BoBotGlobal.input_horizontalDirection * 1.5f,0,0);
-			this.otherRigid.velocity = ( Vector3.right * (BoBotGlobal.input_horizontalDirection * 1.5f)  );
+			BoBotGlobal.physics_velocity = new Vector3( BoBotGlobal.input_horizontalDirection*1.5f,0,0);
+			this.otherRigid.velocity = ( Vector3.right * (BoBotGlobal.input_horizontalDirection*1.5f)  );
 			Vector3 newPos = this.otherRigid.transform.position;
 			
 			newPos = mainCollider.transform.position + otherDistance;

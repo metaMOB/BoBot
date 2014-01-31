@@ -48,10 +48,7 @@ public class AudioFade : MonoBehaviour {
 
         	i += step * Time.deltaTime;
         	audio.volume = Mathf.Lerp(start, end, i);
-			if(audio.volume > 0.2f){
-				audio.volume =0.2f;
-				
-			}
+
     		yield return new WaitForSeconds(step * Time.deltaTime);
 
  		}
@@ -68,8 +65,7 @@ public class AudioFade : MonoBehaviour {
 
  			i += step * Time.deltaTime;
 			audio.volume = Mathf.Lerp(start, end, i);
-			
-			
+
     		yield return new WaitForSeconds(step * Time.deltaTime);
 
  		}

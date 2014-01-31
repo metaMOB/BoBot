@@ -67,5 +67,11 @@ public class BoBot_InputKeyboard : MonoBehaviour {
 		{	
 			BoBotGlobal.godMode = !BoBotGlobal.godMode;
 		}
+		
+		if (Input.GetKeyDown (KeyCode.P) )
+		{	
+		 	BoBotGlobal.heIsDeadJim = true;
+			BoBotGlobal.animator.SetBool("die", true);		
+		}
 	}	
 }
