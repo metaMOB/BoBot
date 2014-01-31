@@ -18,10 +18,10 @@ public class BoBot_SuccessTag : MonoBehaviour {
 				BoBotGlobal.environment.setActiveRiddle (nextRiddle);
 				Save_Load.Write_Data_Player(static_holder.file_to_load, GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
 			}
-			/*} else {
+			else {
 				SceneFader sceneFader = new SceneFader();
 				sceneFader.SwitchScene("StartMenu");
-			}*/
+			}
 		/*}
 		catch {
 		}*/
