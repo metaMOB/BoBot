@@ -1,14 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/BoBot_GUI/Scripts/load_scene.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/boBot/Scripts/Tags/BoBot_SuccessTag.cs">
     <Files>
-      <File FileName="Assets/boBot/Scripts/Tags/BoBot_SuccessTag.cs" Line="24" Column="45" />
-      <File FileName="Assets/BoBot_GUI/Scripts/load_scene.cs" Line="94" Column="22" />
+      <File FileName="Assets/boBot/Scripts/Tags/BoBot_SuccessTag.cs" Line="23" Column="98" />
+      <File FileName="Assets/BoBot_GUI/Scripts/load_scene.cs" Line="1" Column="1" />
       <File FileName="Assets/boBot/Scripts/Colliders/BoBot_DeathCollider.cs" Line="1" Column="1" />
-      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_CarryCollider.cs" Line="49" Column="93" />
-      <File FileName="Assets/boBot/Scripts/BoBot_SidescrollControl.cs" Line="781" Column="1" />
-      <File FileName="Assets/BoBot_GUI/Scripts/Save_Load.cs" Line="75" Column="34" />
-      <File FileName="Assets/boBot/Scripts/boBot_CameraPositioner.cs" Line="11" Column="1" />
+      <File FileName="Assets/boBot/Scripts/Colliders/BoBot_CarryCollider.cs" Line="1" Column="1" />
+      <File FileName="Assets/boBot/Scripts/BoBot_SidescrollControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/BoBot_GUI/Scripts/Save_Load.cs" Line="1" Column="1" />
+      <File FileName="Assets/boBot/Scripts/boBot_CameraPositioner.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
