@@ -100,6 +100,8 @@ public class Save_Load : MonoBehaviour {
 		
 		sw1.Flush();
 		sw1.Close();
+		
+		Gamesave_player_lesen();
 	}
 
 	

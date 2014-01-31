@@ -11,17 +11,19 @@ public class BoBot_SuccessTag : MonoBehaviour {
 		fileToLoad = static_holder.file_to_load;
 	}
 	
-	void OnTriggerEnter (){
-		try {
-			if (!final){
+	void OnTriggerEnter (Collider other){
+		//try {
+			//if (!final){
+			if (other.CompareTag("Player")){
 				BoBotGlobal.environment.setActiveRiddle (nextRiddle);
-				Save_Load.Write_Data_Player(fileToLoad, GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
-			} else {
+				Save_Load.Write_Data_Player(static_holder.file_to_load, GameObject.Find("Player").transform.localPosition.x,GameObject.Find("Player").transform.localPosition.y,GameObject.Find("Player").transform.localPosition.z);
+			}
+			/*} else {
 				SceneFader sceneFader = new SceneFader();
 				sceneFader.SwitchScene("StartMenu");
-			}
-		}
+			}*/
+		/*}
 		catch {
-		}
+		}*/
 	}
 }

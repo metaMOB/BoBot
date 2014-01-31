@@ -86,6 +86,7 @@ public static class BoBotGlobal {
 		public static bool debugging = false;
 	
 		public static bool godMode = false;
+	 	public static bool heIsDeadJim = false;
 		public static int levelCheat = 1;
 	
 		public static int state_currentState;

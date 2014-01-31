@@ -31,14 +31,14 @@ public class BoBot_InputTouch : MonoBehaviour {
 			
 			if (pos.x >= 0.75f && pos.y <= 0.75f && pos.y >= 0.25f){
 				BoBotGlobal.input_horizontalDirection = Mathf.Clamp(BoBotGlobal.input_horizontalDirection+Time.deltaTime, 0, 1);
-			}
+			} 
 			
 			if (pos.y > 0.75f){
 				BoBotGlobal.input_verticalDirection = Mathf.Clamp(BoBotGlobal.input_horizontalDirection+Time.deltaTime,0 , 1);
-			}
-			
-			if (pos.x > 0.25f && pos.x < 0.75f && pos.y < 0.25){
+			} else if (pos.x > 0.25f && pos.x < 0.75f && pos.y < 0.25){
 				BoBotGlobal.input_verticalDirection = Mathf.Clamp(BoBotGlobal.input_horizontalDirection-Time.deltaTime,-1 , 0);
+			} else { 
+				BoBotGlobal.input_verticalDirection = 0f;
 			}
 			
 			if ( (pos.x <= 0.25f && pos.y <= 0.25f) || (pos.x >= 0.75f && pos.y <= 0.25f)){

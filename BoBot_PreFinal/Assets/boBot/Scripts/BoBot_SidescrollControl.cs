@@ -75,7 +75,6 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 	
 	private List<GameObject> debugObjects = new List<GameObject>();
 	
-	private bool heIsDeadJim = false;
 	private SceneFader sceneFader;
 	
 	private float deathTimer = 0; 
@@ -562,7 +561,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 			
 			string sensor = BoBotGlobal.collider_mainCollider.sensorActive("climb");
 			
-			if (BoBotGlobal.input_verticalDirection > 0f){
+			if (BoBotGlobal.input_verticalDirection > 0f && BoBotGlobal.input_horizontalDirection == 0f){
 				BoBotGlobal.physics_velocity.y = BoBotGlobal.speed_jumpSpeedUp;
 				BoBotGlobal.collider_mainCollider.release("carry");
 				BoBotGlobal.animator.SetBool("canCarry", false);
@@ -686,7 +685,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 		BoBotGlobal.character = this.GetComponent<CharacterController>();	
 						
 		BoBotGlobal.originParent = BoBotGlobal.character.transform.parent;
-		
+		BoBotGlobal.heIsDeadJim = false;
 		BoBotGlobal.state_idle = new Idle();
 		BoBotGlobal.state_walk = new Walk();		
 		BoBotGlobal.state_climb = new Climb();	
@@ -770,7 +769,7 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 		pos.z = originZ;// * Time.deltaTime - pos.z;		
 		bobotTransform.position = pos;
 						
-		if (heIsDeadJim){			
+		if (BoBotGlobal.heIsDeadJim){			
 			BoBotGlobal.animator.SetBool("deadBody", true);
 			BoBotGlobal.physics_isGravity = true;
 			BoBotGlobal.physics_velocity = Vector3.zero;
@@ -779,8 +778,10 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 			if (deathTimer > BoBotGlobal.time_timeTillReload){
 				deathTimer = 0f;
 				sceneFader.SwitchScene (Save_Load.ar_Player[1].ToString());
+				//sceneFader.SwitchScene ("DemoLevel_01");
+				
 			}
-			eye.GetComponent<Light>().intensity = eyeIntensity * (1- (deathTimer/(BoBotGlobal.time_timeTillReload)));
+			eye.GetComponent<Light>().intensity = eyeIntensity * (1- (deathTimer+0.1f/(BoBotGlobal.time_timeTillReload)));
 		} else {
 			if (BoBotGlobal.activePlatform != null) {
 		        var newGlobalPlatformPoint = BoBotGlobal.activePlatform.TransformPoint(activeLocalPlatformPoint);
@@ -847,10 +848,10 @@ public class BoBot_SidescrollControl : MonoBehaviour {
 			debugInfo.addText ("> Drift Spd "+(driftSpeed).ToString("0.00"));
 		}
 		
-		if ( BoBotGlobal.collider_mainCollider.sensorActive("lethal") != null && !heIsDeadJim && !BoBotGlobal.godMode){
-			heIsDeadJim = true;
+		if ( BoBotGlobal.collider_mainCollider.sensorActive("lethal") != null && !BoBotGlobal.heIsDeadJim && !BoBotGlobal.godMode){
+			BoBotGlobal.heIsDeadJim = true;
 			BoBotGlobal.animator.SetBool("die", true);
-			Debug.Log ("der Vogel is dod");
+			Debug.Log ("Der Vogel is dod. Mausedod!");
 		}
 	}
 	
